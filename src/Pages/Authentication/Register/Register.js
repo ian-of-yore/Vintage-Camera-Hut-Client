@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -6,22 +6,62 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
+    const imageBBKey = process.env.REACT_APP_imageBB;
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, googleLogin, updateUserProfile } = useContext(AuthContext);
 
 
+
     const handleRegister = (data) => {
-        createUser(data.email, data.password)
-            .then((result) => {
-                console.log(result.user);
-                toast.success('Registration Complete!');
-                updateUserProfile({
-                    displayName: data.name
-                })
-                    .then((result) => console.log(result))
-                    .catch((err) => console.log(err))
+        const img = data.userImg[0];
+        const formData = new FormData();
+        formData.append('image', img);
+        const url = `https://api.imgbb.com/1/upload?key=${imageBBKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                    const userInfo = {
+                        displayName: data.name,
+                        photoURL: imgData.data.url,
+                        email: data.email,
+                        role: data.userRole
+                    }
+                    createUser(data.email, data.password)
+                        .then((result) => {
+                            // console.log(result.user);
+                            updateUserProfile({
+                                displayName: data.name,
+                                photoURL: imgData.data.url
+                            })
+                                .then((result) => {
+                                    // console.log(result)
+                                    fetch('http://localhost:5000/users', {
+                                        method: 'POST',
+                                        headers: {
+                                            'content-type': 'application/json'
+                                        },
+                                        body: JSON.stringify(userInfo)
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            // console.log(data);
+                                            toast.success('Registration Complete!');
+                                        })
+                                })
+                                .catch((err) => console.log(err))
+                        })
+                        .catch((err) => console.log(err))
+                }
             })
-            .catch((err) => console.log(err))
+
+
+
+
+
     }
 
     const handleGoogleLogin = () => {

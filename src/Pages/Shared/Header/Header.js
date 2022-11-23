@@ -4,6 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Header = () => {
     const { user } = useContext(AuthContext);
+    console.log(user);
 
     const menuItems = <>
         <li><Link to='/blogs'>Blogs</Link></li>
@@ -27,7 +28,14 @@ const Header = () => {
                     <Link to='/' className="btn btn-ghost normal-case text-xl">Vintage Camera Hut</Link>
                 </div>
                 <div className='navbar-center hidden lg:flex'>
-                    {user?.displayName}
+                    <div className="avatar">
+                        <div className="w-9 mr-3 rounded-full">
+                            <img src={user?.photoURL} alt='' />
+                        </div>
+                    </div>
+                    <div className='font-mono text-xl'>
+                        {user?.displayName}
+                    </div>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
@@ -35,7 +43,14 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className='lg:hidden navbar-end'>
-                    {user?.displayName}
+                    <div>
+                        {user?.displayName}
+                    </div>
+                    <div className="avatar online">
+                        <div className="w-6 ml-3 rounded-full">
+                            <img src={user?.photoURL} alt='' />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
