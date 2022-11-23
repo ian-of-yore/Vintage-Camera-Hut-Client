@@ -8,8 +8,10 @@ module.exports = {
       {
         darkTheme: {
           primary: "#100F0F",
-          secondary: "#0F3D3E",
-          accent: "#F1F1F1",
+          secondary: "#282A3A",
+          accent: "#C69749",
+          info: '#285430',
+          error: '#CF0A0A'
         },
       },
     ],
