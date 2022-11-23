@@ -4,7 +4,6 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Header = () => {
     const { user } = useContext(AuthContext);
-    console.log(user);
 
     const menuItems = <>
         <li><Link to='/blogs'>Blogs</Link></li>

@@ -11,7 +11,6 @@ const Register = () => {
     const { createUser, googleLogin, updateUserProfile } = useContext(AuthContext);
 
 
-
     const handleRegister = (data) => {
         const img = data.userImg[0];
         const formData = new FormData();
@@ -39,36 +38,41 @@ const Register = () => {
                             })
                                 .then((result) => {
                                     // console.log(result)
-                                    fetch('http://localhost:5000/users', {
-                                        method: 'POST',
-                                        headers: {
-                                            'content-type': 'application/json'
-                                        },
-                                        body: JSON.stringify(userInfo)
-                                    })
-                                        .then(res => res.json())
-                                        .then(data => {
-                                            // console.log(data);
-                                            toast.success('Registration Complete!');
-                                        })
+                                    saveUserToDB(userInfo)
                                 })
                                 .catch((err) => console.log(err))
                         })
                         .catch((err) => console.log(err))
                 }
             })
+    }
 
-
-
-
-
+    const saveUserToDB = (userInfo) => {
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                toast.success('Welcome!');
+            })
     }
 
     const handleGoogleLogin = () => {
         googleLogin()
             .then((result) => {
-                console.log(result.user);
-                toast.success('Welcome!')
+                const user = result.user;
+                const userInfo = {
+                    email: user.email,
+                    role: "Buyer",
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                };
+                saveUserToDB(userInfo)
             })
             .catch((err) => console.log(err))
     }
