@@ -12,7 +12,7 @@ const LogIn = () => {
     const handleLogin = (data) => {
         userLogin(data.email, data.password)
             .then((result) => {
-                console.log(result.user);
+                // console.log(result.user);
                 toast.success('Welcome!!')
             })
             .catch((err) => console.log(err))
