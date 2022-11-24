@@ -12,6 +12,7 @@ import AddProduct from "../../Pages/Dashboard/Sellers/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/Sellers/MyProducts/MyProducts";
 import CategoryProducts from "../../Pages/HomePage/Categories/CategoryProducts";
 import Home from "../../Pages/HomePage/Home/Home";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <CategoryProducts></CategoryProducts>,
+                element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
                 loader: async ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
             }
         ]

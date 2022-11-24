@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
 
@@ -9,6 +9,7 @@ const Register = () => {
     const imageBBKey = process.env.REACT_APP_imageBB;
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, googleLogin, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleRegister = (data) => {
@@ -59,6 +60,7 @@ const Register = () => {
             .then(data => {
                 // console.log(data);
                 toast.success('Welcome!');
+                navigate('/');
             })
     }
 
