@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const AddProduct = () => {
     const imageBBKey = process.env.REACT_APP_imageBB;
     const { register, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleAddProduct = (data) => {
         const img = data.img[0];
@@ -47,6 +49,7 @@ const AddProduct = () => {
                         .then(productData => {
                             if (productData.acknowledged) {
                                 toast.success('Product Added Successfully');
+                                navigate('/dashboard/my-products')
                             }
                         })
                 }

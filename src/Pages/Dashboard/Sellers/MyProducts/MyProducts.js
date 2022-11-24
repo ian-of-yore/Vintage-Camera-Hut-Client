@@ -32,6 +32,23 @@ const MyProducts = () => {
             })
     }
 
+    const handleDeleteProduct = (product) => {
+        const url = `http://localhost:5000/my-products/${product}`;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(deleteProduct => {
+                if (deleteProduct.deletedCount > 0) {
+                    toast.success('Product Deleted!');
+                    refetch();
+                }
+            })
+    }
+
     return (
         <div className='mt-10'>
             <div className="overflow-x-auto w-full">
@@ -54,7 +71,7 @@ const MyProducts = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-20 h-20">
+                                            <div className="rounded-xl w-20 h-20">
                                                 <img src={product.img} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
@@ -81,10 +98,10 @@ const MyProducts = () => {
                                         product?.status === 'Advertised' ?
                                             <button className="btn btn-secondary btn-xs cursor-not-allowed">Already Advertised</button>
                                             :
-                                            <button onClick={() => handleAdvertise(product._id)} className="btn btn-secondary btn-xs">Post to Advertise</button>
+                                            <button onClick={() => handleAdvertise(product._id)} className="btn btn-secondary btn-xs">Click to Advertise</button>
                                     }
                                     <button className="btn btn-secondary btn-xs">Update</button>
-                                    <button className="btn btn-error btn-xs">Delete</button>
+                                    <button onClick={() => handleDeleteProduct(product._id)} className="btn btn-error btn-xs">Delete</button>
                                 </th>
                             </tr>)
                         }
