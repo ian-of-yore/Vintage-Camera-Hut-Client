@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CategoryProductsCard = ({ product }) => {
+const CategoryProductsCard = ({ product, handleBookingModal }) => {
     const { _id, img, name, condition, description, location, originalPrice, resellPrice, sellerName, usedYears, phone, } = product;
-    console.log(product)
+
     return (
         <div className='w-10/12 mx-auto md:h-96'>
             <div className="card md:card-side w-full h-full rounded-none shadow-xl">
@@ -31,6 +31,7 @@ const CategoryProductsCard = ({ product }) => {
                         </div>
                     </div>
                     <button className="btn btn-sm btn-info rounded-none w-full h-12 mt-4">Buy Now</button>
+                    <label onClick={() => handleBookingModal(product)} htmlFor="booking-modal" className="btn bg-primary">open modal</label>
                 </div>
             </div>
         </div>
