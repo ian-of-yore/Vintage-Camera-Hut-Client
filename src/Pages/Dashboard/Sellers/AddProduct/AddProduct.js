@@ -33,7 +33,7 @@ const AddProduct = () => {
                         phone: data.sellerPhone,
                         description: data.description,
                         sellerName: user?.displayName,
-                        sellerEmail: user?.email
+                        sellerEmail: user?.email,
                     }
 
                     fetch('http://localhost:5000/addproduct', {
@@ -57,7 +57,7 @@ const AddProduct = () => {
 
 
     return (
-        <div>
+        <div className='mt-10'>
             <div className='w-10/12 mx-auto'>
                 <h3 className='text-4xl font-mono mb-7 text-white'>Add a Product</h3>
                 <form onSubmit={handleSubmit(handleAddProduct)}>
