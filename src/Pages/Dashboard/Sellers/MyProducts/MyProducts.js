@@ -64,7 +64,8 @@ const MyProducts = () => {
                             <th></th>
                             <th>Product</th>
                             <th>Price</th>
-                            <th>Seller</th>
+                            <th>Seller Info</th>
+                            <th>Stock Avaiability</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -99,6 +100,9 @@ const MyProducts = () => {
                                     <br />
                                     {`Contact: ${product.phone}`}
                                 </td>
+                                <td className='font-bold'>
+                                    {product?.stock === 'Sold' ? 'Sold' : 'Available'}
+                                </td>
                                 <th className='grid grid-cols-1 gap-2'>
                                     {
                                         product?.status === 'Advertised' ?
@@ -108,11 +112,13 @@ const MyProducts = () => {
                                     }
                                     <button className="btn btn-secondary btn-xs">Update</button>
                                     <button onClick={() => handleDeleteProduct(product._id)} className="btn btn-error btn-xs">Delete</button>
+                                    <label htmlFor="confirmation-modal" className="btn btn-error">open modal</label>
                                 </th>
                             </tr>)
                         }
                     </tbody>
                 </table>
+
             </div>
         </div>
     );

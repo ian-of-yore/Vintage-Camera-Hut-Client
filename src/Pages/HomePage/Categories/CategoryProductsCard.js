@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { useSellerVerified } from '../../../hooks/useSellerVerified';
 import BookingModal from '../../Dashboard/Buyers/BookingModal/BookingModal';
+import { GoUnverified, GoVerified } from "react-icons/go";
 
 const CategoryProductsCard = ({ product }) => {
     const { user } = useContext(AuthContext);
-    const { _id, img, name, condition, description, location, originalPrice, resellPrice, sellerName, usedYears, phone, } = product;
+    const { _id, img, name, condition, description, location, originalPrice, resellPrice, sellerName, usedYears, phone, sellerEmail } = product;
     const [buyNow, setBuyNow] = useState(false);
+    const [isSellerVerified] = useSellerVerified(sellerEmail);
 
     const handleBookingModal = (product) => {
         setBuyNow(true);
@@ -28,7 +31,10 @@ const CategoryProductsCard = ({ product }) => {
                             <p className='text-lg font-semibold'>Posted By,</p>
                             <div className='flex justify-between items-end'>
                                 <div>
-                                    <p className='text-white'>{sellerName}</p>
+                                    <div className='flex items-center'>
+                                        <p className='text-white text-lg font-semibold mr-2'>{sellerName}</p>
+                                        <p>{isSellerVerified ? <GoVerified className='w-4 h-4 text-blue-600'></GoVerified> : <GoUnverified className='w-4 h-4 text-red-500'></GoUnverified>}</p>
+                                    </div>
                                     <p className='text-white'>{location}</p>
                                     <p className='text-white'>Contact: {phone}</p>
                                 </div>

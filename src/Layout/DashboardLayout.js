@@ -13,8 +13,6 @@ const DashboardLayout = () => {
     const [isSeller] = useSeller(user?.email);
     const [isAdmin] = useAdmin(user?.email);
 
-    console.log(isBuyer);
-
     const dashboardItems = <>
         {
             isBuyer && <li className='mb-3'><Link to='/dashboard/my-orders'>My Orders</Link></li>

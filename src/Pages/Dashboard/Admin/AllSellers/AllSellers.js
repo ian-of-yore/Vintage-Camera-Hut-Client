@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllSellers = () => {
     const { data: sellers = [], refetch } = useQuery({
@@ -15,6 +16,23 @@ const AllSellers = () => {
         }
     })
 
+    const handleVerifySeller = (seller) => {
+        fetch(`http://localhost:5000/sellers/verify/${seller}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Seller Verified');
+                    refetch();
+                }
+            })
+    }
+
     return (
         <div className='mt-10 font-semibold text-xl'>
             <h3 className='text-4xl font-serif font-semibold text-center text-white my-10'>All the listed sellers of this website</h3>
@@ -27,6 +45,7 @@ const AllSellers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -46,6 +65,14 @@ const AllSellers = () => {
                                 </td>
                                 <td>{seller.email}</td>
                                 <td>{seller.role}</td>
+                                <td>
+                                    {
+                                        seller?.status === 'Verified' ?
+                                            <button className='btn btn-accent text-gray-100 disabled w-36 cursor-not-allowed'>Verified</button>
+                                            :
+                                            <button onClick={() => handleVerifySeller(seller._id)} className='btn btn-info w-36'>Click to verify</button>
+                                    }
+                                </td>
                                 <td><button className='btn-error btn'>Remove</button></td>
                             </tr>)
                         }

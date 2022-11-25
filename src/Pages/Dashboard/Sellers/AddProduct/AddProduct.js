@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ const AddProduct = () => {
     const { register, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+
 
     const handleAddProduct = (data) => {
         const img = data.img[0];
@@ -36,6 +37,7 @@ const AddProduct = () => {
                         description: data.description,
                         sellerName: user?.displayName,
                         sellerEmail: user?.email,
+                        postTime: new Date(),
                     }
 
                     fetch('http://localhost:5000/addproduct', {
