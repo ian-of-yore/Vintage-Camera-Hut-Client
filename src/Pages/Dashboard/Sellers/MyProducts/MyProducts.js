@@ -9,7 +9,9 @@ const MyProducts = () => {
     const { data: Products = [], refetch } = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/my-products?email=${user?.email}`);
+            const res = await fetch(`http://localhost:5000/my-products?email=${user?.email}`, {
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
+            });
             const data = await res.json();
             return data;
         }
@@ -21,6 +23,7 @@ const MyProducts = () => {
             method: "PUT",
             headers: {
                 'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
             }
         })
             .then(res => res.json())
@@ -37,7 +40,8 @@ const MyProducts = () => {
         fetch(url, {
             method: 'DELETE',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
             }
         })
             .then(res => res.json())

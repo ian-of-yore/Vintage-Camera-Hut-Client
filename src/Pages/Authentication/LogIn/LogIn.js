@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { useToken } from '../../../hooks/useToken';
 
 const LogIn = () => {
     const { register, handleSubmit } = useForm();
     const { userLogin, googleLogin } = useContext(AuthContext);
+    const [userEmail, setUserEmail] = useState('');
+    const [token] = useToken(userEmail);
 
     let location = useLocation();
     let navigate = useNavigate();
@@ -18,7 +21,8 @@ const LogIn = () => {
             .then((result) => {
                 // console.log(result.user);
                 toast.success('Welcome!!');
-                navigate(from, { replace: true });
+                // navigate(from, { replace: true });
+                setUserEmail(data.email);
             })
             .catch((err) => console.log(err))
     }
@@ -35,6 +39,7 @@ const LogIn = () => {
             .then(data => {
                 // console.log(data);
                 toast.success('Welcome!');
+                setUserEmail(userInfo.email);
             })
     }
 
@@ -48,7 +53,7 @@ const LogIn = () => {
                     displayName: user.displayName,
                     photoURL: user.photoURL
                 };
-                saveUserToDB(userInfo)
+                saveUserToDB(userInfo);
             })
             .catch((err) => console.log(err))
     }

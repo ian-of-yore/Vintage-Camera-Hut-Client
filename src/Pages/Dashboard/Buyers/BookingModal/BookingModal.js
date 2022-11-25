@@ -25,7 +25,8 @@ const BookingModal = ({ product, user, setBuyNow }) => {
         fetch('http://localhost:5000/orders', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
             },
             body: JSON.stringify(order)
         })

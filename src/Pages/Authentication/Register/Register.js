@@ -4,11 +4,14 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
+import { useToken } from '../../../hooks/useToken';
 
 const Register = () => {
     const imageBBKey = process.env.REACT_APP_imageBB;
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, googleLogin, updateUserProfile } = useContext(AuthContext);
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
 
@@ -60,7 +63,8 @@ const Register = () => {
             .then(data => {
                 // console.log(data);
                 toast.success('Welcome!');
-                navigate('/');
+                // navigate('/');
+                setCreatedUserEmail(userInfo.email);
             })
     }
 
