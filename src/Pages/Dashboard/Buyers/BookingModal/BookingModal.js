@@ -1,13 +1,46 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const BookingModal = ({ product, user, setBuyNow }) => {
     const { register, handleSubmit } = useForm();
 
     const handleOrder = (data) => {
-        console.log('eije ei product the kinmu', product);
-        console.log('form data', data);
+        const order = {
+            buyerName: data.buyerName,
+            buyerEmail: data.buyerEmail,
+            buyerPhone: data.buyerPhone,
+            meetingPlace: data.meetingPlace,
+            productID: product._id,
+            productImg: product.img,
+            productName: product.name,
+            productPrice: product.resellPrice,
+            productCondition: product.condition,
+            productLocation: product.location,
+            sellerName: product.sellerName,
+            sellerEmail: product.sellerEmail,
+            sellerPhone: product.phone
+        }
+
+        fetch('http://localhost:5000/orders', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(orderData => {
+                if (orderData.acknowledged) {
+                    toast.success('Order Placed Successfully!')
+                }
+            })
+
         setBuyNow(false)
+    }
+
+    const closeModal = () => {
+        setBuyNow(false);
     }
 
     return (
@@ -43,7 +76,7 @@ const BookingModal = ({ product, user, setBuyNow }) => {
                     </div>
                     <div className='flex justify-between items-center'>
                         <div className="modal-action">
-                            <label htmlFor="booking-modal" className="btn btn-error w-20">Close</label>
+                            <label onClick={closeModal} htmlFor="booking-modal" className="btn btn-error w-20">Close</label>
                         </div>
                         <input type="submit" className='btn btn-info text-white text-lg font-semibold font-serif w-40 mt-5' value="Add To Cart" />
                     </div>
