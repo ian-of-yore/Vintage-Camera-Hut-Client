@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
+import BookingModal from '../../Dashboard/Buyers/BookingModal/BookingModal';
 
-const CategoryProductsCard = ({ product, handleBookingModal }) => {
+const CategoryProductsCard = ({ product }) => {
+    const { user } = useContext(AuthContext);
     const { _id, img, name, condition, description, location, originalPrice, resellPrice, sellerName, usedYears, phone, } = product;
+    const [buyNow, setBuyNow] = useState(false);
+
+    const handleBookingModal = (product) => {
+        setBuyNow(true);
+    }
 
     return (
         <div className='w-10/12 mx-auto md:h-96'>
@@ -30,10 +38,12 @@ const CategoryProductsCard = ({ product, handleBookingModal }) => {
                             </div>
                         </div>
                     </div>
-                    <button className="btn btn-sm btn-info rounded-none w-full h-12 mt-4">Buy Now</button>
-                    <label onClick={() => handleBookingModal(product)} htmlFor="booking-modal" className="btn bg-primary">open modal</label>
+                    <label onClick={() => handleBookingModal(product)} htmlFor="booking-modal" className="btn btn-sm btn-info rounded-none w-full h-12 mt-4">Order Now</label>
                 </div>
             </div>
+            {
+                buyNow && <BookingModal product={product} user={user} setBuyNow={setBuyNow}></BookingModal>
+            }
         </div>
     );
 };

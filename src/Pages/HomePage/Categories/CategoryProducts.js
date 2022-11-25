@@ -1,14 +1,9 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import BookingModal from '../../Dashboard/Buyers/BookingModal/BookingModal';
 import CategoryProductsCard from './CategoryProductsCard';
 
 const CategoryProducts = () => {
     const products = useLoaderData();
-
-    const handleBookingModal = (product) => {
-        console.log(product)
-    }
 
     return (
         <div className='my-10'>
@@ -17,17 +12,9 @@ const CategoryProducts = () => {
                     products.map(product => <CategoryProductsCard
                         key={product._id}
                         product={product}
-                        handleBookingModal={handleBookingModal}
                     ></CategoryProductsCard>)
                 }
             </div>
-            {
-                products.map(product => <BookingModal
-                    key={product._id}
-                    product={product}
-                    handleBookingModal={handleBookingModal}
-                ></BookingModal>)
-            }
         </div>
     );
 };
