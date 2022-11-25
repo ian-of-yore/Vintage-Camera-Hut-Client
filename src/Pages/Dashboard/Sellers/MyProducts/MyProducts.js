@@ -10,7 +10,9 @@ const MyProducts = () => {
         queryKey: ['products', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/my-products?email=${user?.email}`, {
-                authorization: `bearer ${localStorage.getItem('jwt-token')}`
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('jwt-token')}`
+                }
             });
             const data = await res.json();
             return data;

@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvider';
+import { useAdmin } from '../hooks/useAdmin';
+import { useBuyer } from '../hooks/useBuyer';
+import { useSeller } from '../hooks/useSeller';
 import Footer from '../Pages/Shared/Footer/Footer';
 import Header from '../Pages/Shared/Header/Header';
 
 const DashboardLayout = () => {
+    const { user } = useContext(AuthContext);
+    const [isBuyer] = useBuyer(user?.email);
+    const [isSeller] = useSeller(user?.email);
+    const [isAdmin] = useAdmin(user?.email);
+
+    console.log(isBuyer);
 
     const dashboardItems = <>
-        <li className='mb-3'><Link to='/dashboard/my-orders'>My Orders</Link></li>
-        <li className='mb-3'><Link to='/dashboard/add-product'>Add Product</Link></li>
-        <li className='mb-3'><Link to='/dashboard/my-products'>My Products</Link></li>
-        <li className='mb-3'><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
-        <li className='mb-3'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
-        <li className='mb-3'><Link to='/dashboard/reported-items'>Reported Items</Link></li>
+        {
+            isBuyer && <li className='mb-3'><Link to='/dashboard/my-orders'>My Orders</Link></li>
+        }
+        {
+            isSeller && <>
+                <li className='mb-3'><Link to='/dashboard/add-product'>Add Product</Link></li>
+                <li className='mb-3'><Link to='/dashboard/my-products'>My Products</Link></li>
+            </>
+        }
+        {
+            isAdmin && <>
+                <li className='mb-3'><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
+                <li className='mb-3'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
+                <li className='mb-3'><Link to='/dashboard/reported-items'>Reported Items</Link></li>
+            </>
+        }
     </>
 
     return (
