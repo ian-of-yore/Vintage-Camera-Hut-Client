@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
 
@@ -15,6 +16,27 @@ const AllBuyers = () => {
             return data;
         }
     })
+
+    const handleDeleteBuyer = (buyer) => {
+        const confirm = window.confirm('Are you sure you want to delete this buyer?');
+        if (confirm) {
+            const url = `http://localhost:5000/buyers/delete/${buyer}`;
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('jwt-token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount) {
+                        toast.error('Buyer Deleted');
+                        refetch();
+                    }
+
+                })
+        }
+    }
 
 
     return (
@@ -48,7 +70,7 @@ const AllBuyers = () => {
                                 </td>
                                 <td>{buyer.email}</td>
                                 <td>{buyer.role}</td>
-                                <td><button className='btn-error btn'>Remove</button></td>
+                                <td><button onClick={() => handleDeleteBuyer(buyer._id)} className='btn-error btn'>Remove</button></td>
                             </tr>)
                         }
                     </tbody>

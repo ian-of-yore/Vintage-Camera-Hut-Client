@@ -33,6 +33,28 @@ const AllSellers = () => {
             })
     }
 
+    const handleDeleteSeller = (seller) => {
+        const confirm = window.confirm('Want to delete this seller?');
+        if (confirm) {
+            const url = `http://localhost:5000/sellers/delete/${seller}`;
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('jwt-token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount) {
+                        toast.error('Seller Deleted');
+                        refetch();
+                    }
+
+                })
+        }
+    }
+
     return (
         <div className='mt-10 font-semibold text-xl'>
             <h3 className='text-4xl font-serif font-semibold text-center text-white my-10'>All the listed sellers of this website</h3>
@@ -73,7 +95,7 @@ const AllSellers = () => {
                                             <button onClick={() => handleVerifySeller(seller._id)} className='btn btn-info w-36'>Click to verify</button>
                                     }
                                 </td>
-                                <td><button className='btn-error btn'>Remove</button></td>
+                                <td><button onClick={() => handleDeleteSeller(seller._id)} className='btn-error btn'>Remove</button></td>
                             </tr>)
                         }
                     </tbody>

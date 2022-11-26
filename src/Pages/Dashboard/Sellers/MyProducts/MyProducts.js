@@ -38,21 +38,24 @@ const MyProducts = () => {
     }
 
     const handleDeleteProduct = (product) => {
-        const url = `http://localhost:5000/my-products/${product}`;
-        fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('jwt-token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(deleteProduct => {
-                if (deleteProduct.deletedCount > 0) {
-                    toast.success('Product Deleted!');
-                    refetch();
+        const confirmation = window.confirm('Delete this product?');
+        if (confirmation) {
+            const url = `http://localhost:5000/my-products/${product}`;
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('jwt-token')}`
                 }
             })
+                .then(res => res.json())
+                .then(deleteProduct => {
+                    if (deleteProduct.deletedCount > 0) {
+                        toast.success('Product Deleted!');
+                        refetch();
+                    }
+                })
+        }
     }
 
     return (
@@ -112,7 +115,6 @@ const MyProducts = () => {
                                     }
                                     <button className="btn btn-secondary btn-xs">Update</button>
                                     <button onClick={() => handleDeleteProduct(product._id)} className="btn btn-error btn-xs">Delete</button>
-                                    <label htmlFor="confirmation-modal" className="btn btn-error">open modal</label>
                                 </th>
                             </tr>)
                         }
