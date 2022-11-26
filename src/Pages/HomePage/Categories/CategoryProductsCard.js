@@ -3,6 +3,8 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { useSellerVerified } from '../../../hooks/useSellerVerified';
 import BookingModal from '../../Dashboard/Buyers/BookingModal/BookingModal';
 import { GoUnverified, GoVerified } from "react-icons/go";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import toast from 'react-hot-toast';
 
 const CategoryProductsCard = ({ product }) => {
     const { user } = useContext(AuthContext);
@@ -28,6 +30,35 @@ const CategoryProductsCard = ({ product }) => {
         setBuyNow(true);
     }
 
+    const handleReportProduct = (product) => {
+        const reportedProduct = {
+            productID: _id,
+            productName: name,
+            productImg: img,
+            sellerEmail,
+            phone,
+            sellerName,
+            reportedUserEmail: user?.email,
+            reportedUserName: user?.displayName
+        }
+
+        const url = `http://localhost:5000/products/reported`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
+            },
+            body: JSON.stringify(reportedProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.error('Reported to Admin')
+                }
+            })
+    }
+
     return (
         <div className='w-10/12 mx-auto md:h-96'>
             <div className="card md:card-side w-full h-full rounded-none shadow-xl">
@@ -36,11 +67,20 @@ const CategoryProductsCard = ({ product }) => {
                 </figure>
                 <div className="w-full md:w-1/2 bg-secondary h-1/2 md:h-full">
                     <div className='p-5 text-accent h-5/6'>
-                        <h2 className="text-center text-2xl font-mono font-semibold mb-1">{name}</h2>
-                        <h4><span className='text-lg font-semibold'>Condition: </span><span className='text-white'>{condition}</span></h4>
-                        <p className='text-white md:text-base md:mt-2'>The original price of this Camera was <span className='text-accent text-lg'>${originalPrice}</span>, It has been
+                        <div className='flex items-center justify-between mb-2'>
+                            <h2 className=" text-2xl font-mono font-semibold">{name}</h2>
+                            <div className="dropdown dropdown-right flex items-center">
+                                <label tabIndex={0}><BsThreeDotsVertical className='w-6 h-6 text-white'></BsThreeDotsVertical></label>
+                                <ul tabIndex={0} className="dropdown-content menu shadow w-20">
+                                    <button className='btn-info btn-sm rounded-lg text-white'>Wishlist</button>
+                                    <button onClick={() => handleReportProduct(_id)} className='btn-error btn-sm rounded-lg mt-2 text-white'>Report</button>
+                                </ul>
+                            </div>
+                        </div>
+                        <h4 className='text-left'><span className='text-lg font-semibold'>Condition: </span><span className='text-white'>{condition}</span></h4>
+                        <p className='text-white md:text-base text-left'>The original price of this Camera was <span className='text-accent text-lg'>${originalPrice}</span>, It has been
                             in the possesion of the seller for <span className='text-accent text-lg'>{usedYears}</span> years and the seller is asking for <span className='text-accent text-lg'>${resellPrice}</span> as its resell value</p>
-                        <p className='text-left text-white my-3 text-sm'><span className='text-accent font-semibold text-base'>Description:</span> {description.length > 200 ? description.slice(0, 200) + '...' : description}</p>
+                        <p className='text-left text-white text-sm'><span className='text-accent text-xl font-semibold '>Description:</span> {description.length > 200 ? description.slice(0, 200) + '...' : description}</p>
                         <div className='text-left mt-2 md:text-sm'>
                             <p className='text-lg font-semibold'>Posted By,</p>
                             <div className='flex justify-between items-end'>
@@ -58,7 +98,7 @@ const CategoryProductsCard = ({ product }) => {
                                             diffDays > 0 && `${diffDays} Days, `
                                         }
                                         {
-                                            diffHours > 0 && `${diffHours} Hours &`
+                                            diffHours > 0 && `${diffHours} Hours `
                                         }
                                         {
                                             diffMins > 0 && `${diffMins} Minutes ago`

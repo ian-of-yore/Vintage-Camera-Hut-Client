@@ -4,6 +4,7 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import LogIn from "../../Pages/Authentication/LogIn/LogIn";
 import Register from "../../Pages/Authentication/Register/Register";
+import Blog from "../../Pages/Blog/Blog";
 import AllBuyers from "../../Pages/Dashboard/Admin/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/Admin/AllSellers/AllSellers";
 import ReportedItems from "../../Pages/Dashboard/Admin/ReportedItems/ReportedItems";
@@ -12,6 +13,7 @@ import AddProduct from "../../Pages/Dashboard/Sellers/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/Sellers/MyProducts/MyProducts";
 import CategoryProducts from "../../Pages/HomePage/Categories/CategoryProducts";
 import Home from "../../Pages/HomePage/Home/Home";
+import PageNotFound from "../../Pages/Shared/PageNotFound/PageNotFound";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -38,6 +40,10 @@ export const router = createBrowserRouter([
                 path: '/category/:id',
                 element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
                 loader: async ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             }
         ]
     },
@@ -70,5 +76,9 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <PageNotFound></PageNotFound>
     }
 ])

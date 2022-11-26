@@ -13,7 +13,7 @@ const Header = () => {
     }
 
     const menuItems = <>
-        <li><Link to='/blogs'>Blogs</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/about'>About</Link></li>
         {
             user?.email ?
