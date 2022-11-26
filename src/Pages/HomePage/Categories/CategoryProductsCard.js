@@ -6,9 +6,23 @@ import { GoUnverified, GoVerified } from "react-icons/go";
 
 const CategoryProductsCard = ({ product }) => {
     const { user } = useContext(AuthContext);
-    const { _id, img, name, condition, description, location, originalPrice, resellPrice, sellerName, usedYears, phone, sellerEmail } = product;
+    const { _id, img, name, condition, description, location, originalPrice, resellPrice, sellerName, usedYears, phone, sellerEmail, postTime } = product;
     const [buyNow, setBuyNow] = useState(false);
     const [isSellerVerified] = useSellerVerified(sellerEmail);
+
+    const timeDiff = (postTime) => {
+        const presentTime = new Date();
+        const previousTime = new Date(postTime);
+
+        const diffMs = (presentTime - previousTime) // diff in milliseconds
+        const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+        const diffHours = Math.floor((diffMs % 86400000) / 3600000); // hours
+        const diffDays = Math.floor(diffMs / 86400000); // days
+
+        // console.log('days', diffDays, 'hours', diffHours, 'mins', diffMins)
+        return { diffDays, diffHours, diffMins }
+    }
+    const { diffMins, diffHours, diffDays } = timeDiff(postTime);
 
     const handleBookingModal = (product) => {
         setBuyNow(true);
@@ -39,7 +53,17 @@ const CategoryProductsCard = ({ product }) => {
                                     <p className='text-white'>Contact: {phone}</p>
                                 </div>
                                 <div>
-                                    <p className='text-white'>eto minutes ago</p>
+                                    <p className='text-lg text-accent font-mono'>
+                                        {
+                                            diffDays > 0 && `${diffDays} Days, `
+                                        }
+                                        {
+                                            diffHours > 0 && `${diffHours} Hours &`
+                                        }
+                                        {
+                                            diffMins > 0 && `${diffMins} Minutes ago`
+                                        }
+                                    </p>
                                 </div>
                             </div>
                         </div>
