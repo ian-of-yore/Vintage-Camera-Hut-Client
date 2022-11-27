@@ -9,6 +9,7 @@ import AllBuyers from "../../Pages/Dashboard/Admin/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/Admin/AllSellers/AllSellers";
 import ReportedItems from "../../Pages/Dashboard/Admin/ReportedItems/ReportedItems";
 import MyOrders from "../../Pages/Dashboard/Buyers/MyOrders/MyOrders";
+import Payment from "../../Pages/Dashboard/Buyers/Payment/Payment";
 import AddProduct from "../../Pages/Dashboard/Sellers/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/Sellers/MyProducts/MyProducts";
 import CategoryProducts from "../../Pages/HomePage/Categories/CategoryProducts";
@@ -44,7 +45,12 @@ export const router = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog></Blog>
-            }
+            },
+            {
+                path: '/payment/:productId',
+                element: <BuyerRoute><Payment></Payment></BuyerRoute>,
+                loader: async ({ params }) => fetch(`http://localhost:5000/products/${params.productId}`)
+            },
         ]
     },
     {
