@@ -30,6 +30,37 @@ const CategoryProductsCard = ({ product }) => {
         setBuyNow(true);
     }
 
+    const handleAddToWishlist = (product) => {
+        const wishListProduct = {
+            productID: _id,
+            productName: name,
+            productImg: img,
+            price: resellPrice,
+            condition,
+            sellerEmail,
+            phone,
+            sellerName,
+            userEmail: user?.email,
+            userName: user?.displayName
+        }
+
+        const url = `http://localhost:5000/products/wishlist`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('jwt-token')}`
+            },
+            body: JSON.stringify(wishListProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success('Added to wishlist')
+                }
+            })
+    }
+
     const handleReportProduct = (product) => {
         const reportedProduct = {
             productID: _id,
@@ -72,7 +103,7 @@ const CategoryProductsCard = ({ product }) => {
                             <div className="dropdown dropdown-right flex items-center">
                                 <label tabIndex={0}><BsThreeDotsVertical className='w-6 h-6 text-white'></BsThreeDotsVertical></label>
                                 <ul tabIndex={0} className="dropdown-content menu shadow w-20">
-                                    <button className='btn-info btn-sm rounded-lg text-white'>Wishlist</button>
+                                    <button onClick={() => handleAddToWishlist(_id)} className='btn-info btn-sm rounded-lg text-white'>Wishlist</button>
                                     <button onClick={() => handleReportProduct(_id)} className='btn-error btn-sm rounded-lg mt-2 text-white'>Report</button>
                                 </ul>
                             </div>

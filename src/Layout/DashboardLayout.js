@@ -15,7 +15,10 @@ const DashboardLayout = () => {
 
     const dashboardItems = <>
         {
-            isBuyer && <li className='mb-3'><Link to='/dashboard/my-orders'>My Orders</Link></li>
+            isBuyer && <>
+                <li className='mb-3'><Link to='/dashboard/my-orders'>My Orders</Link></li>
+                <li className='mb-3'><Link to='/dashboard/my-wishlist'>My Wishlist</Link></li>
+            </>
         }
         {
             isSeller && <>
