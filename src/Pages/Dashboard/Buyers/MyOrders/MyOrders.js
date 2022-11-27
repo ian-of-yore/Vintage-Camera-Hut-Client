@@ -66,8 +66,13 @@ const MyOrders = () => {
                             </td>
                             <th>
                                 <div className='grid grid-cols-1 gap-3'>
-                                    <Link to={`/payment/${order.productID}`}><button className="btn btn-info text-white btn-xs">Pay Now</button></Link>
-                                    <button className="btn btn-error text-white btn-xs">Remove</button>
+                                    {
+                                        order.availability === 'sold' ?
+                                            <button className='btn btn-secondary btn-xs text-white disabled w-28'>Paid</button>
+                                            :
+                                            <Link to={`/payment/${order.productID}`}><button className="btn btn-info text-white btn-xs w-28">Pay Now</button></Link>
+                                    }
+                                    <button className="btn btn-error text-white btn-xs w-28">Remove</button>
                                 </div>
                             </th>
                         </tr>)}

@@ -58,6 +58,7 @@ const MyProducts = () => {
         }
     }
 
+
     return (
         <div className='mt-10'>
             <div className="overflow-x-auto w-full">
@@ -104,7 +105,7 @@ const MyProducts = () => {
                                     {`Contact: ${product.phone}`}
                                 </td>
                                 <td className='font-bold'>
-                                    {product?.stock === 'Sold' ? 'Sold' : 'Available'}
+                                    {product.availability === "sold" ? 'Sold' : 'Available'}
                                 </td>
                                 <th className='grid grid-cols-1 gap-2'>
                                     {
