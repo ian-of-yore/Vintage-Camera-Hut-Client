@@ -21,7 +21,7 @@ const Categories = () => {
                     categories.map((category, index) => <Link key={index} to={`category/${category}`}><button className="btn bg-orange-500 w-72 h-24 mb-4 md:mb-0 mr-10 text-3xl">{category}</button></Link>)
                 }
             </div> */}
-            <h2 className='font-serif text-3xl text-center text-secondary mb-4'>Explore Our Collections!</h2>
+            <h2 className='font-serif text-3xl text-center text-secondary mb-6'>Explore Our Collections!</h2>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {
                     categories.map((category, index) => <div key={index}>
