@@ -11,11 +11,13 @@ const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, googleLogin, updateUserProfile } = useContext(AuthContext);
     const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [error, setError] = useState('');
     const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
 
     const handleRegister = (data) => {
+        setError('');
         const img = data.userImg[0];
         const formData = new FormData();
         formData.append('image', img);
@@ -44,9 +46,15 @@ const Register = () => {
                                     // console.log(result)
                                     saveUserToDB(userInfo)
                                 })
-                                .catch((err) => console.log(err))
+                                .catch((err) => {
+                                    console.log(err);
+                                    setError(err.message)
+                                })
                         })
-                        .catch((err) => console.log(err))
+                        .catch((err) => {
+                            console.log(err);
+                            setError(err.message)
+                        })
                 }
             })
     }
@@ -69,6 +77,7 @@ const Register = () => {
     }
 
     const handleGoogleLogin = () => {
+        setError('');
         googleLogin()
             .then((result) => {
                 const user = result.user;
@@ -80,7 +89,10 @@ const Register = () => {
                 };
                 saveUserToDB(userInfo)
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+                setError(err.message);
+            })
     }
 
     return (
@@ -90,27 +102,30 @@ const Register = () => {
                 <form onSubmit={handleSubmit(handleRegister)} className='grid grid-cols-1 gap-3 text-black '>
                     <div>
                         <label className="label"> <span className="label-text">Full Name</span> </label>
-                        <input {...register('name')} type="text" className="input input-bordered w-full h-10" />
+                        <input {...register('name')} type="text" className="input input-bordered w-full h-10" required />
                     </div>
                     <div>
                         <label className="label"> <span className="label-text">Email Address</span> </label>
-                        <input {...register('email')} type="email" className="input input-bordered w-full h-10" />
+                        <input {...register('email')} type="email" className="input input-bordered w-full h-10" required />
                     </div>
                     <div>
                         <label className="label"> <span className="label-text">Password</span> </label>
-                        <input {...register('password')} type="password" className="input input-bordered w-full h-10" />
+                        <input {...register('password')} type="password" className="input input-bordered w-full h-10" required />
                     </div>
                     <div>
                         <label className="label"> <span className="label-text">Your Picture</span> </label>
-                        <input {...register('userImg')} type="file" className="file-input file-input-bordered file-input-primary w-full h-10" />
+                        <input {...register('userImg')} type="file" className="file-input file-input-bordered file-input-primary w-full h-10" required />
                     </div>
                     <div>
                         <label className="label"> <span className="label-text">Continue as a..</span> </label>
-                        <select {...register('userRole')} className="select select-info w-full h-10 mb-2">
+                        <select {...register('userRole')} className="select select-info w-full h-10 mb-2" required>
                             <option>Buyer</option>
                             <option>Seller</option>
                         </select>
                     </div>
+                    {
+                        <p className='text-red-600 text-lg font-semibold text-center'>{error}</p>
+                    }
                     <p className='text-white'>Already have an account? <Link to='/login' className='underline'>Login</Link></p>
                     <input type="submit" className='btn bg-gray-600 text-white font-semibold text-lg' value="Register" />
                 </form>

@@ -17,7 +17,7 @@ const DashboardLayout = () => {
         {
             isBuyer && <>
                 <li className='mb-3'><Link to='/dashboard/my-orders'>My Orders</Link></li>
-                <li className='mb-3'><Link to='/dashboard/my-wishlist'>My Wishlist</Link></li>
+                {/* <li className='mb-3'><Link to='/dashboard/my-wishlist'>My Wishlist</Link></li> */}
             </>
         }
         {
@@ -30,7 +30,7 @@ const DashboardLayout = () => {
             isAdmin && <>
                 <li className='mb-3'><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
                 <li className='mb-3'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
-                <li className='mb-3'><Link to='/dashboard/reported-items'>Reported Items</Link></li>
+                {/* <li className='mb-3'><Link to='/dashboard/reported-items'>Reported Items</Link></li> */}
             </>
         }
     </>

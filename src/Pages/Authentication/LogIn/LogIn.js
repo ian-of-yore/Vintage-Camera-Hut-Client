@@ -8,6 +8,7 @@ import { useToken } from '../../../hooks/useToken';
 
 const LogIn = () => {
     const { register, handleSubmit } = useForm();
+    const [error, setError] = useState('');
     const { userLogin, googleLogin } = useContext(AuthContext);
     const [userEmail, setUserEmail] = useState('');
     const [token] = useToken(userEmail);
@@ -17,6 +18,7 @@ const LogIn = () => {
     let from = location.state?.from?.pathname || '/';
 
     const handleLogin = (data) => {
+        setError('')
         userLogin(data.email, data.password)
             .then((result) => {
                 // console.log(result.user);
@@ -24,7 +26,10 @@ const LogIn = () => {
                 // navigate(from, { replace: true });
                 setUserEmail(data.email);
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+                setError(err.message);
+            })
     }
 
     const saveUserToDB = (userInfo) => {
@@ -44,6 +49,7 @@ const LogIn = () => {
     }
 
     const handleGoogleLogin = () => {
+        setError('');
         googleLogin()
             .then((result) => {
                 const user = result.user;
@@ -55,7 +61,10 @@ const LogIn = () => {
                 };
                 saveUserToDB(userInfo);
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+                setError(err.message);
+            })
     }
 
     return (
@@ -71,6 +80,9 @@ const LogIn = () => {
                         <label className="label"> <span className="label-text">Password</span> </label>
                         <input {...register('password')} type="password" className="input input-bordered w-full h-10" />
                     </div>
+                    {
+                        <p className='text-red-600 text-lg font-semibold text-center'>{error}</p>
+                    }
                     <p className='text-white'>New here? <Link to='/register' className='underline'>Register</Link></p>
                     <input type="submit" className='btn bg-gray-600 text-white font-semibold text-lg' value="Login" />
                 </form>

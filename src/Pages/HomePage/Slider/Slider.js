@@ -11,7 +11,7 @@ import bg05 from '../../../assests/background08.jpg';
 const Slider = () => {
 
     return (
-        <div className='h-screen mt-16 w-11/12 mx-auto'>
+        <div className='min-h-screen mt-16 w-11/12 mx-auto'>
             <div className="carousel w-full h-screen">
                 <div id="slide1" className="carousel-item relative w-full h-5/6">
                     <div className="hero" style={{ backgroundImage: `url(${bg03})` }}>
