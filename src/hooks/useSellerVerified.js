@@ -5,7 +5,7 @@ export const useSellerVerified = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/sellers/verified/${email}`)
+            fetch(`https://rangefinder-server.vercel.app/sellers/verified/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsSellerVerified(data.isVerified);

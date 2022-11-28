@@ -6,7 +6,7 @@ const AdvertisedProducts = () => {
     const { data: advertisedProducts = [], } = useQuery({
         queryKey: ['advertised-products'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/advertised-products');
+            const res = await fetch('https://rangefinder-server.vercel.app/advertised-products');
             const data = await res.json();
             return data;
         }

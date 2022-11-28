@@ -6,7 +6,7 @@ export const useBuyer = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users/buyer/${email}`)
+            fetch(`https://rangefinder-server.vercel.app/users/buyer/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsBuyer(data.isBuyer);

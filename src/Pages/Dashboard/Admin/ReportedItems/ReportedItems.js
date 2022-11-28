@@ -7,7 +7,7 @@ const ReportedItems = () => {
 
     useEffect(() => {
         const getReportedItems = async () => {
-            const url = `http://localhost:5000/products/reported`;
+            const url = `https://rangefinder-server.vercel.app/products/reported`;
             const res = await axios.get(url, {
                 headers: {
                     'content-type': 'application/json',

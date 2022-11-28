@@ -17,6 +17,10 @@ const LogIn = () => {
     let navigate = useNavigate();
     let from = location.state?.from?.pathname || '/';
 
+    if (token) {
+        navigate(from, { replace: true });
+    }
+
     const handleLogin = (data) => {
         setError('')
         userLogin(data.email, data.password)
@@ -33,7 +37,7 @@ const LogIn = () => {
     }
 
     const saveUserToDB = (userInfo) => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://rangefinder-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -45,6 +49,7 @@ const LogIn = () => {
                 // console.log(data);
                 toast.success('Welcome!');
                 setUserEmail(userInfo.email);
+                // navigate('/')
             })
     }
 

@@ -44,7 +44,7 @@ const CategoryProductsCard = ({ product }) => {
             userName: user?.displayName
         }
 
-        const url = `http://localhost:5000/products/wishlist`;
+        const url = `https://rangefinder-server.vercel.app/products/wishlist`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -73,7 +73,7 @@ const CategoryProductsCard = ({ product }) => {
             reportedUserName: user?.displayName
         }
 
-        const url = `http://localhost:5000/products/reported`;
+        const url = `https://rangefinder-server.vercel.app/products/reported`;
         fetch(url, {
             method: 'POST',
             headers: {

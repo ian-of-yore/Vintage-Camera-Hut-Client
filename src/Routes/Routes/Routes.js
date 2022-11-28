@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
-                loader: async ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/category/${params.id}`)
             },
             {
                 path: '/blog',
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
             {
                 path: '/payment/:productId',
                 element: <BuyerRoute><Payment></Payment></BuyerRoute>,
-                loader: async ({ params }) => fetch(`http://localhost:5000/products/${params.productId}`)
+                loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/products/${params.productId}`)
             },
         ]
     },

@@ -15,6 +15,9 @@ const Register = () => {
     const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
 
+    if (token) {
+        navigate('/');
+    }
 
     const handleRegister = (data) => {
         setError('');
@@ -60,7 +63,7 @@ const Register = () => {
     }
 
     const saveUserToDB = (userInfo) => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://rangefinder-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
