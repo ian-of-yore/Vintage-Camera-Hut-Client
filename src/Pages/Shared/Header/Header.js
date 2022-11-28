@@ -38,7 +38,7 @@ const Header = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost normal-case text-xl">Vintage Camera Hut</Link>
+                    <Link to='/' className="btn btn-ghost normal-case text-xl">The Rangefinder</Link>
                 </div>
                 <div className='navbar-center hidden lg:flex'>
                     {
