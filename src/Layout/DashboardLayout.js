@@ -53,7 +53,7 @@ const DashboardLayout = () => {
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-secondary text-white">
-                        {dashboardItems}
+                        {dashboardItems ? dashboardItems : <button className="btn loading">loading</button>}
                     </ul>
                 </div>
             </div>

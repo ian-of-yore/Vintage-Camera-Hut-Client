@@ -7,8 +7,8 @@ const PageNotFound = () => {
     return (
         <div>
             <Header></Header>
-            <div>
-                <img src={img} className='w-full max-h-screen' alt="" />
+            <div className='min-h-screen'>
+                <img src={img} className='w-full min-h-screen' alt="" />
             </div>
             <Footer></Footer>
         </div>
