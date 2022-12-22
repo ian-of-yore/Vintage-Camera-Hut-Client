@@ -38,6 +38,11 @@ const DashboardLayout = () => {
     return (
         <div>
             <Header></Header>
+            <div className='bg-accent'>
+                <div className='lg:hidden '>
+                    <label htmlFor="dashboard-drawer" className=" lg:hidden btn rounded-none w-40 flex justify-start bg-black">Open Dashboard</label>
+                </div>
+            </div>
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content bg-accent">
