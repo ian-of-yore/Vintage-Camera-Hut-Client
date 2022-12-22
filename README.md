@@ -5,6 +5,10 @@
 ## Overview
 This is an online e-commerce based project. The main focus is to buy and sell second hand photography goods, specially cameras. The project is based on 3-tier accessibility. The functionality varies based the role of the user (buyer, seller, admin).
 
+## Credentials for Admin to check out the admin functionalities
+    ### Email: super.user@camerahut.com
+    ### Password: $A_Random-Password$9119
+
 ## Features:
     ### The user role is defined at the registration section and the user info are saved to a secure database. All social logins/registratin are considered as buyer.
     ### The buyers can add products to their cart or add to wishlist for future purchase, they can also report a certain product to the admin.
