@@ -13,6 +13,7 @@ import MyWishlist from "../../Pages/Dashboard/Buyers/MyWishlist/MyWishlist";
 import Payment from "../../Pages/Dashboard/Buyers/Payment/Payment";
 import AddProduct from "../../Pages/Dashboard/Sellers/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/Sellers/MyProducts/MyProducts";
+import AdvertisedProductDetails from "../../Pages/HomePage/AdvertisedProducts/AdvertisedProductDetails";
 import CategoryProducts from "../../Pages/HomePage/Categories/CategoryProducts";
 import Home from "../../Pages/HomePage/Home/Home";
 import PageNotFound from "../../Pages/Shared/PageNotFound/PageNotFound";
@@ -52,6 +53,11 @@ export const router = createBrowserRouter([
                 element: <BuyerRoute><Payment></Payment></BuyerRoute>,
                 loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/products/${params.productId}`)
             },
+            {
+                path: '/trending/:id',
+                element: <AdvertisedProductDetails></AdvertisedProductDetails>,
+                loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/products/${params.id}`)
+            }
         ]
     },
     {
