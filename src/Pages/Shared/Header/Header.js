@@ -59,7 +59,7 @@ const Header = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <div className='lg:hidden navbar-end'>
+                <div className='hidden lg:hidden navbar-end'>
                     {
                         user && <>
                             <div className="avatar">

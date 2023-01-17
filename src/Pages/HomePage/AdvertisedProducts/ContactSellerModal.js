@@ -14,7 +14,7 @@ const ContactSellerModal = ({ name, phone, sellerEmail, sellerName }) => {
             <div className="modal text-black">
                 <div className="modal-box">
                     <h3 className="font-bold text-2xl font-mono mb-3">Product: {name}</h3>
-                    <p className='text-left pl-5 text-lg font-semibold'>Seller Informations:</p>
+                    <p className='text-left pl-10 text-lg underline font-semibold'>Seller Informations:</p>
                     <p className='text-left pl-10'>Name: {sellerName}</p>
                     <p className='text-left pl-10'>Email: {sellerEmail}</p>
                     <p className='text-left pl-10'>Phone: {phone}</p>
