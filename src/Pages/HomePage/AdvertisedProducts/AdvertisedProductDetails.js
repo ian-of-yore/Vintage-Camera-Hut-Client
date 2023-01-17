@@ -72,11 +72,11 @@ const AdvertisedProductDetails = () => {
                         <p><span className='font-mono font-semibold'>Product Details:</span> {description}</p>
                     </div>
                     <div className='w-2/5 text-black flex flex-col px-5'>
-                        <button htmlFor="my-modal" className='btn btn-secondary mb-2 text-white'>Contact Seller</button>
+                        <label htmlFor="seller-modal" className='btn btn-secondary mb-2 text-white'>Contact Seller</label>
                         <button onClick={() => handleNavigateToCategory(category)} className='btn btn-secondary text-white'>Explore Other Products in this Category</button>
                     </div>
                     {
-                        <ContactSellerModal></ContactSellerModal>
+                        <ContactSellerModal name={name} phone={phone} sellerEmail={sellerEmail} sellerName={sellerName}></ContactSellerModal>
                     }
                 </div>
             </div>
