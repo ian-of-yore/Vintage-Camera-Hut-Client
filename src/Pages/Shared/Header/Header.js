@@ -15,7 +15,7 @@ const Header = () => {
     const menuItems = <>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/about'>About</Link></li>
-        {
+        {/* {
             user?.email ?
                 <>
                     <li><Link to='/dashboard'>Dashboard</Link></li>
@@ -23,7 +23,8 @@ const Header = () => {
                 </>
                 :
                 <li><Link to='/login'>Login</Link></li>
-        }
+        } */}
+        <li><Link to='/dashboard'>Dashboard</Link></li>
     </>
 
     return (
