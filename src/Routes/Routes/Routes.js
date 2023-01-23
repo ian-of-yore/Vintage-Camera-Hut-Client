@@ -2,6 +2,7 @@ import { async } from "@firebase/util";
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
+import About from "../../Pages/About/About";
 import LogIn from "../../Pages/Authentication/LogIn/LogIn";
 import Register from "../../Pages/Authentication/Register/Register";
 import Blog from "../../Pages/Blog/Blog";
@@ -16,6 +17,7 @@ import MyProducts from "../../Pages/Dashboard/Sellers/MyProducts/MyProducts";
 import AdvertisedProductDetails from "../../Pages/HomePage/AdvertisedProducts/AdvertisedProductDetails";
 import CategoryProducts from "../../Pages/HomePage/Categories/CategoryProducts";
 import Home from "../../Pages/HomePage/Home/Home";
+import Products from "../../Pages/Products/Products";
 import PageNotFound from "../../Pages/Shared/PageNotFound/PageNotFound";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
@@ -40,8 +42,16 @@ export const router = createBrowserRouter([
                 element: <LogIn></LogIn>
             },
             {
+                path: '/about',
+                element: <About></About>
+            },
+            {
+                path: '/products',
+                element: <Products></Products>
+            },
+            {
                 path: '/category/:id',
-                element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
+                element: <CategoryProducts></CategoryProducts>,
                 loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/category/${params.id}`)
             },
             {

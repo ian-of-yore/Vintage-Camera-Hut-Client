@@ -14,7 +14,7 @@ const Categories = () => {
     ]
 
     return (
-        <div className='w-11/12 mx-auto'>
+        <div className='w-11/12 mx-auto lg:w-10/12'>
             {/* <div>
                 <h3 className='text-3xl text-center text-black font-semibold font-serif my-10'>Here are the three categories to buy from</h3>
                 {

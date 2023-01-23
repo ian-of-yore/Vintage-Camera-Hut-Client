@@ -11,10 +11,10 @@ import bg05 from '../../../assests/background08.jpg';
 const Slider = () => {
 
     return (
-        <div className='min-h-screen mt-16 w-11/12 mx-auto'>
+        <div className='min-h-screen mt-16 w-11/12 mx-auto lg:w-10/12'>
             <div className="carousel w-full h-screen">
                 <div id="slide1" className="carousel-item relative w-full h-5/6">
-                    <div className="hero" style={{ backgroundImage: `url(${bg03})` }}>
+                    <div className="hero rounded-lg" style={{ backgroundImage: `url(${bg03})` }}>
                         <div className="card h-[550px] glass w-8/12 mx-auto">
                             <figure><img src={img02} alt="car!" /></figure>
                             <div className="card-body text-center">
@@ -29,7 +29,7 @@ const Slider = () => {
                     </div>
                 </div>
                 <div id="slide2" className="carousel-item relative w-full h-5/6">
-                    <div className="hero" style={{ backgroundImage: `url(${bg01})` }}>
+                    <div className="hero rounded-lg" style={{ backgroundImage: `url(${bg01})` }}>
                         <div className="card h-[550px] glass w-8/12 mx-auto">
                             <figure><img src={img01} alt="car!" className='w-full' /></figure>
                             <div className="card-body text-center">
@@ -44,7 +44,7 @@ const Slider = () => {
                     </div>
                 </div>
                 <div id="slide3" className="carousel-item relative w-full h-5/6">
-                    <div className="hero" style={{ backgroundImage: `url(${bg05})` }}>
+                    <div className="hero rounded-lg" style={{ backgroundImage: `url(${bg05})` }}>
                         <div className="card h-[550px] glass w-8/12 mx-auto">
                             <figure><img src={img03} alt="car!" className='w-full' /></figure>
                             <div className="card-body text-center">

@@ -13,18 +13,19 @@ const Header = () => {
     }
 
     const menuItems = <>
+        <li><Link to='/products'>Products</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/about'>About</Link></li>
-        {/* {
+        <li><Link to='/dashboard'>Dashboard</Link></li>
+        {
             user?.email ?
                 <>
-                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                    {/* <li><Link to='/dashboard'>Dashboard</Link></li> */}
                     <li onClick={handleLogOut}><Link>Logut</Link></li>
                 </>
                 :
                 <li><Link to='/login'>Login</Link></li>
-        } */}
-        <li><Link to='/dashboard'>Dashboard</Link></li>
+        }
     </>
 
     return (
