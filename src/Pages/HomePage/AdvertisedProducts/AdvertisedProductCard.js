@@ -6,7 +6,7 @@ const AdvertisedProductCard = ({ product }) => {
 
     return (
         <div className='w-full shadow-2xl rounded-none'>
-            <Link to={`/trending/${product._id}`}>
+            <Link to={`/product/${product._id}`}>
                 <div className='h-72 bg-slate-800'>
                     <div className='h-64'>
                         <img src={img} alt="" className='w-full h-full' />

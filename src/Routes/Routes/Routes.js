@@ -15,6 +15,7 @@ import Payment from "../../Pages/Dashboard/Buyers/Payment/Payment";
 import AddProduct from "../../Pages/Dashboard/Sellers/AddProduct/AddProduct";
 import MyProducts from "../../Pages/Dashboard/Sellers/MyProducts/MyProducts";
 import AdvertisedProductDetails from "../../Pages/HomePage/AdvertisedProducts/AdvertisedProductDetails";
+import OrderProduct from "../../Pages/HomePage/AdvertisedProducts/OrderProduct";
 import CategoryProducts from "../../Pages/HomePage/Categories/CategoryProducts";
 import Home from "../../Pages/HomePage/Home/Home";
 import Products from "../../Pages/Products/Products";
@@ -59,12 +60,17 @@ export const router = createBrowserRouter([
                 element: <Blog></Blog>
             },
             {
+                path: '/orderProduct/:id',
+                element: <PrivateRoute><BuyerRoute><OrderProduct></OrderProduct></BuyerRoute></PrivateRoute>,
+                loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/products/${params.id}`)
+            },
+            {
                 path: '/payment/:productId',
                 element: <BuyerRoute><Payment></Payment></BuyerRoute>,
                 loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/products/${params.productId}`)
             },
             {
-                path: '/trending/:id',
+                path: '/product/:id',
                 element: <AdvertisedProductDetails></AdvertisedProductDetails>,
                 loader: async ({ params }) => fetch(`https://rangefinder-server.vercel.app/products/${params.id}`)
             }

@@ -1,20 +1,25 @@
 import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import { GoUnverified, GoVerified } from 'react-icons/go';
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { useSellerVerified } from '../../../hooks/useSellerVerified';
-import ContactSellerModal from './ContactSellerModal';
+import { useQuery } from '@tanstack/react-query';
+import { GiPriceTag } from 'react-icons/gi';
+import { SlLocationPin } from 'react-icons/sl';
+import { AiOutlineFieldTime } from "react-icons/ai";
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const AdvertisedProductDetails = () => {
+    const { user } = useContext(AuthContext);
     const { _id, img, name, category, condition, description, location,
         originalPrice, phone, postTime, resellPrice,
-        sellerEmail, sellerName, usedYears } = useLoaderData();
+        sellerEmail, sellerName, usedYears, purchaseYear } = useLoaderData();
 
     const [isSellerVerified] = useSellerVerified(sellerEmail);
-    const navigate = useNavigate();
-
-    const handleNavigateToCategory = (category) => {
-        navigate(`/category/${category}`)
-    }
 
     const timeDiff = (postTime) => {
         const presentTime = new Date();
@@ -30,53 +35,144 @@ const AdvertisedProductDetails = () => {
     }
     const { diffMins, diffHours, diffDays } = timeDiff(postTime);
 
+    const { data: allProductsInCategory = [], } = useQuery({
+        queryKey: ['advertised-products'],
+        queryFn: async () => {
+            const res = await fetch(`https://rangefinder-server.vercel.app/category/${category}`);
+            const data = await res.json();
+            return data;
+        }
+    })
+    const similarProducts = allProductsInCategory.filter(product => product._id !== _id);
+
+    const handleAddToWishlist = (id) => {
+        if (user?.email) {
+            toast.success('Product added to wishlist');
+        } else {
+            toast.error('You need to login to perform this action')
+        }
+    }
+
+    const handleReportProduct = (id) => {
+        if (user?.email) {
+            toast.success('Product has been reported to Admin');
+        } else {
+            toast.error('You need to login to perform this action')
+        }
+    }
+
     return (
-        <div className='min-h-screen w-11/12 mx-auto md:w-9/12 md:mx-auto flex justify-center items-center my-10'>
-            <div className="rounded-lg shadow-2xl">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 bg-secondary md:h-[400px]">
-                    <div className='md:col-span-3'>
-                        <img src={img} className="rounded-lg shadow-2xl h-[400px] w-full" alt='' />
+        <div className='w-11/12 mx-auto lg:w-10/12 min-h-screen'>
+            <div className="card md:card-side shadow-xl mt-10 rounded-none lg:w-10/12 mx-auto">
+                <figure className='md:w-3/5'><img src={img} alt="Album" className='h-80 sm:h-[450px] md:h-96' /></figure>
+                <div className="card-body text-black md:w-2/5">
+                    <div className='flex items-center justify-between mb-2'>
+                        <h2 className="card-title">{name}</h2>
+                        <div className="dropdown dropdown-right flex items-center">
+                            <label tabIndex={0}><BsThreeDotsVertical className='w-4 h-4 font-bold text-black'></BsThreeDotsVertical></label>
+                            <ul tabIndex={0} className="dropdown-content menu shadow w-20">
+                                <button onClick={() => handleAddToWishlist(_id)} className='btn-info btn-sm rounded-lg text-white'>Wishlist</button>
+                                <button onClick={() => handleReportProduct(_id)} className='btn-error btn-sm rounded-lg mt-2 text-white'>Report</button>
+                            </ul>
+                        </div>
                     </div>
-                    <div className='md:col-span-2 text-left p-2 md:pl-3 md:pr-5 md:py-5 flex flex-col justify-between'>
-                        <div className='pb-10 md:pb-0 pl-4 md:pl-0'>
-                            <h1 className="text-5xl font-bold text-accent">{name}</h1>
-                        </div>
-                        <div className='pb-10 md:pb-0 pl-4 md:pl-0'>
-                            <p className="text-xl font-mono font-semibold text-accent"><span className='text-white'>Price:</span> ${resellPrice}</p>
-                            <p className="text-xl font-mono font-semibold text-accent"><span className='text-white'>Condition:</span> {condition}</p>
-                            <p className="text-xl font-mono font-semibold text-accent"><span className='text-white'>Posted:</span> {
-                                diffDays > 0 && `${diffDays} Days, `
+                    <div className='flex justify-start items-center'>
+                        <GiPriceTag className='w-5 h-5 mr-1'></GiPriceTag>
+                        <p className='text-left text-lg font-semibold text-rose-700'>${resellPrice}</p>
+                    </div>
+                    <div className='flex justify-start items-center'>
+                        <SlLocationPin className='w-4 h-4 mr-1'></SlLocationPin>
+                        <p className='text-left text-base'>{location}</p>
+                    </div>
+                    <p className='text-justify'>The product is in {condition} condition. It has been in the possesion of the seller for {usedYears} years and the seller status is {isSellerVerified ? 'verified' : 'not verified'}</p>
+                    <div className='flex justify-start items-center pb-3'>
+                        <AiOutlineFieldTime className='w-5 h-5 mr-1'></AiOutlineFieldTime>
+                        <p className='text-base text-left'>
+                            {
+                                diffDays > 0 && ` ${diffDays} Days, `
                             }
-                                {
-                                    diffHours > 0 && `${diffHours} Hours `
-                                }
-                                {
-                                    diffMins > 0 && `${diffMins} Minutes ago`
-                                }</p>
-                            <p className="text-xl font-mono font-semibold text-accent"><span className='text-white'>Location</span>: {location}</p>
-                            <div className='flex items-center'>
-                                <p className="text-xl font-mono font-semibold text-accent mr-2"><span className='text-white'>Posted By:</span> {sellerName}</p>
-                                <p>{isSellerVerified ? <GoVerified className='w-4 h-4 text-blue-600'></GoVerified> : <GoUnverified className='w-4 h-4 text-red-500'></GoUnverified>}</p>
-                            </div>
-                        </div>
-                        <div>
-                            <Link to={`/payment/${_id}`}><button className="btn btn-primary w-full btn-info text-white">Purchase</button></Link>
-                        </div>
+                            {
+                                diffHours > 0 && `${diffHours} Hours `
+                            }
+                            {
+                                diffMins > 0 && `${diffMins} Minutes ago`
+                            }
+                        </p>
+                    </div>
+                    <div className="card-actions">
+                        <Link to={`/orderProduct/${_id}`} className="btn btn-secondary text-white btn-sm w-full"><button>Order Now</button></Link>
                     </div>
                 </div>
-                <div className='md:flex md:justify-between md:items-center p-4 bg-gray-300 text-lg'>
-                    <div className='text-black md:w-3/5 text-justify mt-5 md:mt-0'>
-                        <p className='mb-2'>The owner <span className='font-mono font-semibold'>{sellerName}</span> has used <span className='font-mono font-semibold'>{name}</span> for <span className='font-mono font-semibold'>{usedYears}</span> years.
-                            The Original price was <span className='font-mono font-semibold'>${originalPrice}</span>.
-                        </p>
-                        <p><span className='font-mono font-semibold'>Product Details:</span> {description}</p>
-                    </div>
-                    <div className='md:w-2/5 text-black flex flex-col px-5 mt-5 md:mt-0'>
-                        <label htmlFor="seller-modal" className='btn btn-secondary mb-2 text-white'>Contact Seller</label>
-                        <button onClick={() => handleNavigateToCategory(category)} className='btn btn-secondary text-white'>Explore Other Products in this Category</button>
-                    </div>
+            </div>
+            <div className='my-10 text-black text-left'>
+                <Tabs>
+                    <TabList>
+                        <Tab><p className='font-serif text-lg'>Description</p></Tab>
+                        <Tab><p className='font-serif text-lg'>Seller Information</p></Tab>
+                    </TabList>
+                    <TabPanel>
+                        <div className='ml-2 sm:ml-5'>
+                            <h3 className='text-lg font-sans mt-5 mb-1 underline'>Introduction</h3>
+                            <p>{description}</p>
+                            <h3 className='text-lg font-sans mt-5 mb-1 underline'>Key Points</h3>
+                            <ul className='list-disc ml-10'>
+                                <li>Product Category: <span className='font-mono'>{category}</span></li>
+                                <li>The product is in <span className='font-mono'>{condition}</span> condition.</li>
+                                <li>The owner <span className='font-mono'>{sellerName}</span> purchased it in <span className='font-mono'>{purchaseYear}</span> and has used it for <span className='font-mono'>{usedYears}</span> years.</li>
+                                <li>The price at that time was <span className='font-mono'>${originalPrice}</span> & <span className='font-mono'>{sellerName}</span> is asking for <span className='font-mono'>${resellPrice}</span> at the moment.</li>
+                            </ul>
+                        </div>
+                    </TabPanel>
+                    <TabPanel>
+                        <div className='ml-2 sm:ml-5'>
+                            <div className="flex items-center space-x-3">
+                                <div className="avatar placeholder">
+                                    <div className="bg-neutral-focus text-neutral-content rounded-full w-20">
+                                        <span className="text-3xl">{sellerName.slice(0, 1)}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className='flex items-center'>
+                                        <p className='text-black text-lg font-semibold mr-2'>{sellerName}</p>
+                                        <p>{isSellerVerified ? <GoVerified className='w-4 h-4 text-blue-600'></GoVerified> : <GoUnverified className='w-4 h-4 text-red-500'></GoUnverified>}</p>
+                                    </div>
+                                    <div className="font-mono font-semibold">{location}</div>
+                                </div>
+                            </div>
+                            <div className="collapse w-60">
+                                <input type="checkbox" />
+                                <div className="collapse-title text-xl font-medium pl-0">
+                                    <button className='btn btn-sm bg-gray-800 text-white w-full'>Contact Seller</button>
+                                </div>
+                                <div className="collapse-content">
+                                    <p><span className='font-semibold'>Email:</span> {sellerEmail}</p>
+                                    <p><span className='font-semibold'>Phone:</span> +{phone}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </TabPanel>
+                </Tabs>
+            </div>
+            <div className='mb-10 text-black'>
+                <h1 className='text-2xl font-serif text-left mb-4'>Releted Products</h1>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6'>
                     {
-                        <ContactSellerModal name={name} phone={phone} sellerEmail={sellerEmail} sellerName={sellerName}></ContactSellerModal>
+                        similarProducts.length && similarProducts.map(product => <Link to={`/product/${product._id}`} key={product._id}>
+                            <div className="card rounded-lg card-compact bg-gray-200 shadow-xl">
+                                <figure><img src={product.img} alt="Shoes" className='h-72 sm:h-60 md:h-52 lg:h-52 w-full' /></figure>
+                                <div className="card-body">
+                                    <h2 className='card-title'>{product.name}</h2>
+                                    <div className='flex justify-start items-center'>
+                                        <GiPriceTag className='w-5 h-5 mr-1'></GiPriceTag>
+                                        <p className='text-left text-base font-semibold text-black'>{product.resellPrice}$</p>
+                                    </div>
+                                    <div className='flex justify-start items-center'>
+                                        <SlLocationPin className='w-5 h-5 mr-1'></SlLocationPin>
+                                        <p className='text-left text-base'>{product.location}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>)
                     }
                 </div>
             </div>
