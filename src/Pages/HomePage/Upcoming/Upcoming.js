@@ -23,7 +23,7 @@ const Upcoming = () => {
                         Keep an eye out for our upcoming products. We will add a huge selection of colour and black & white films.
                         We will stock some of the rarest, expired and antique <strong>35mm</strong> and <strong>120mm</strong> films.
                     </p>
-                    <label onClick={handleModal} htmlFor="my-modal" className="btn bg-orange-700 text-white">Keep Me Updated!</label>
+                    <label onClick={handleModal} htmlFor="my-modal" className="btn bg-secondary text-white">Keep Me Updated!</label>
                 </div>
             </div>
             {
