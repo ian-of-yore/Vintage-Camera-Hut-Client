@@ -74,25 +74,25 @@ const LogIn = () => {
 
     return (
         <div className='bg-secondary flex justify-center h-screen items-center'>
-            <div className='lg:w-1/3 lg:mx-auto w-2/3 mx-auto'>
+            <div className='w-3/4 sm:w-2/3 lg:w-1/3 lg:mx-auto mx-auto'>
                 <h3 className='text-3xl font-mono mb-7 text-white'>Login</h3>
                 <form onSubmit={handleSubmit(handleLogin)} className='grid grid-cols-1 gap-3 text-black '>
                     <div>
                         <label className="label"> <span className="label-text">Email Address</span> </label>
-                        <input {...register('email')} type="email" className="input input-bordered w-full h-10" />
+                        <input {...register('email')} type="email" className="input input-bordered w-full h-12" />
                     </div>
                     <div>
                         <label className="label"> <span className="label-text">Password</span> </label>
-                        <input {...register('password')} type="password" className="input input-bordered w-full h-10" />
+                        <input {...register('password')} type="password" className="input input-bordered w-full h-12" />
                     </div>
                     {
                         <p className='text-red-600 text-lg font-semibold text-center'>{error}</p>
                     }
                     <p className='text-white'>New here? <Link to='/register' className='underline'>Register</Link></p>
-                    <input type="submit" className='btn bg-gray-600 text-white font-semibold text-lg' value="Login" />
+                    <input type="submit" className='btn bg-gray-600 text-white font-semibold text-base md:text-lg h-10' value="Login" />
                 </form>
                 <div className="divider text-white">OR</div>
-                <button onClick={handleGoogleLogin} className='btn bg-gray-600 text-white font-semibold text-lg w-full'>Continue with Google <FcGoogle className='w-6 h-6 ml-2'></FcGoogle></button>
+                <button onClick={handleGoogleLogin} className='btn bg-gray-600 text-white font-semibold text-base md:text-lg w-full h-10'>Continue with Google <FcGoogle className='w-6 h-6 ml-2'></FcGoogle></button>
             </div>
         </div>
     );

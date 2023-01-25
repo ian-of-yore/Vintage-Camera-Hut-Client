@@ -100,7 +100,12 @@ const AdvertisedProductDetails = () => {
                         </p>
                     </div>
                     <div className="card-actions">
-                        <Link to={`/orderProduct/${_id}`} className="btn btn-secondary text-white btn-sm w-full"><button>Order Now</button></Link>
+                        {
+                            user?.email ?
+                                <Link to={`/orderProduct/${_id}`} className="w-full"><button className='btn btn-secondary text-white btn-sm w-full'>Order Now</button></Link>
+                                :
+                                <Link to='/login' className="w-full"><button className='btn btn-secondary text-white btn-sm w-full'>Login to place order</button></Link>
+                        }
                     </div>
                 </div>
             </div>

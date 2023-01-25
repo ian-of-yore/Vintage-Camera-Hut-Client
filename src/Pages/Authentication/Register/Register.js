@@ -100,31 +100,33 @@ const Register = () => {
 
     return (
         <div className='bg-secondary flex justify-center min-h-screen items-center py-10'>
-            <div className='lg:w-1/3 lg:mx-auto w-2/3 mx-auto'>
-                <h3 className='text-3xl font-mono mb-7 text-white'>Register</h3>
+            <div className='w-11/12 sm:w-10/12 lg:w-2/3 mx-auto'>
+                <h3 className='text-3xl font-mono mt-7 text-white'>Register</h3>
                 <form onSubmit={handleSubmit(handleRegister)} className='grid grid-cols-1 gap-3 text-black '>
-                    <div>
-                        <label className="label"> <span className="label-text">Full Name</span> </label>
-                        <input {...register('name')} type="text" className="input input-bordered w-full h-10" required />
-                    </div>
-                    <div>
-                        <label className="label"> <span className="label-text">Email Address</span> </label>
-                        <input {...register('email')} type="email" className="input input-bordered w-full h-10" required />
-                    </div>
-                    <div>
-                        <label className="label"> <span className="label-text">Password</span> </label>
-                        <input {...register('password')} type="password" className="input input-bordered w-full h-10" required />
-                    </div>
-                    <div>
-                        <label className="label"> <span className="label-text">Your Picture</span> </label>
-                        <input {...register('userImg')} type="file" className="file-input file-input-bordered file-input-primary w-full h-10" required />
-                    </div>
-                    <div>
-                        <label className="label"> <span className="label-text">Continue as a..</span> </label>
-                        <select {...register('userRole')} className="select select-info w-full h-10 mb-2" required>
-                            <option>Buyer</option>
-                            <option>Seller</option>
-                        </select>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>
+                        <div>
+                            <label className="label"> <span className="label-text">Full Name</span> </label>
+                            <input {...register('name')} type="text" className="input input-bordered w-full h-10" required />
+                        </div>
+                        <div>
+                            <label className="label"> <span className="label-text">Email Address</span> </label>
+                            <input {...register('email')} type="email" className="input input-bordered w-full h-10" required />
+                        </div>
+                        <div>
+                            <label className="label"> <span className="label-text">Password</span> </label>
+                            <input {...register('password')} type="password" className="input input-bordered w-full h-10" required />
+                        </div>
+                        <div>
+                            <label className="label"> <span className="label-text">Your Picture</span> </label>
+                            <input {...register('userImg')} type="file" className="file-input file-input-bordered file-input-primary w-full h-10" required />
+                        </div>
+                        <div>
+                            <label className="label"> <span className="label-text">Continue as a..</span> </label>
+                            <select {...register('userRole')} className="select select-info w-full h-10 mb-2" required>
+                                <option>Buyer</option>
+                                <option>Seller</option>
+                            </select>
+                        </div>
                     </div>
                     {
                         <p className='text-red-600 text-lg font-semibold text-center'>{error}</p>
