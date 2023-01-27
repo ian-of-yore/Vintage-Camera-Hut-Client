@@ -87,7 +87,7 @@ const AdvertisedProductDetails = () => {
     const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
         const { carouselState: { currentSlide } } = rest;
         return (
-            <div className='relative pt-4'>
+            <div className='relative -bottom-5'>
                 <button className={currentSlide === 0 ? 'disable' : ''} onClick={() => previous()}><BsFillArrowLeftCircleFill className='w-8 h-8 text-gray-800'></BsFillArrowLeftCircleFill></button>
                 <button onClick={() => next()}><BsFillArrowRightCircleFill className='ml-6 w-8 h-8 text-gray-800'></BsFillArrowRightCircleFill></button>
             </div>
