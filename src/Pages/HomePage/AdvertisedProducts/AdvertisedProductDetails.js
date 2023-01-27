@@ -9,9 +9,12 @@ import { GiPriceTag } from 'react-icons/gi';
 import { SlLocationPin } from 'react-icons/sl';
 import { AiOutlineFieldTime } from "react-icons/ai";
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const AdvertisedProductDetails = () => {
     const { user } = useContext(AuthContext);
@@ -60,6 +63,36 @@ const AdvertisedProductDetails = () => {
             toast.error('You need to login to perform this action')
         }
     }
+
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 2999, min: 1320 },
+            items: 4
+        },
+        desktop: {
+            breakpoint: { max: 1319, min: 960 },
+            items: 3
+        },
+        tablet: {
+            breakpoint: { max: 959, min: 668 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 668, min: 0 },
+            items: 1
+        }
+    };
+
+    const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+        const { carouselState: { currentSlide } } = rest;
+        return (
+            <div className='relative pt-4'>
+                <button className={currentSlide === 0 ? 'disable' : ''} onClick={() => previous()}><BsFillArrowLeftCircleFill className='w-8 h-8 text-gray-800'></BsFillArrowLeftCircleFill></button>
+                <button onClick={() => next()}><BsFillArrowRightCircleFill className='ml-6 w-8 h-8 text-gray-800'></BsFillArrowRightCircleFill></button>
+            </div>
+        );
+    };
 
     return (
         <div className='w-11/12 mx-auto lg:w-10/12 min-h-screen'>
@@ -160,26 +193,40 @@ const AdvertisedProductDetails = () => {
             </div>
             <div className='mb-10 text-black'>
                 <h1 className='text-2xl font-serif text-left mb-4'>Releted Products</h1>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6'>
-                    {
-                        similarProducts.length && similarProducts.map(product => <Link to={`/product/${product._id}`} key={product._id}>
-                            <div className="card rounded-lg card-compact bg-gray-200 shadow-xl">
-                                <figure><img src={product.img} alt="Shoes" className='h-72 sm:h-60 md:h-52 lg:h-52 w-full' /></figure>
-                                <div className="card-body">
-                                    <h2 className='card-title'>{product.name}</h2>
-                                    <div className='flex justify-start items-center'>
-                                        <GiPriceTag className='w-5 h-5 mr-1'></GiPriceTag>
-                                        <p className='text-left text-base font-semibold text-black'>{product.resellPrice}$</p>
+                {
+                    similarProducts.length && <div className='xs:px-10 sm:px-0 md:px-0'>
+                        <Carousel
+                            responsive={responsive}
+                            infinite={true}
+                            swipeable={true}
+                            removeArrowOnDeviceType={["tablet", "mobile"]}
+                            autoPlay={true}
+                            autoPlaySpeed={3000}
+                            arrows={false}
+                            renderButtonGroupOutside={true}
+                            customButtonGroup={<ButtonGroup />}
+                        >
+                            {
+                                similarProducts.map(product => <Link to={`/product/${product._id}`} key={product._id}>
+                                    <div className="card rounded-lg card-compact bg-gray-200 shadow-xl mx-0 sm:mx-4 md:mx-4 lg:mx-2 border-b-4 border-indigo-500">
+                                        <figure><img src={product.img} alt="Shoes" className='h-72 sm:h-60 md:h-52 lg:h-52 w-full' /></figure>
+                                        <div className="card-body border-x-2 border-indigo-500">
+                                            <h2 className='card-title'>{product.name}</h2>
+                                            <div className='flex justify-start items-center'>
+                                                <GiPriceTag className='w-5 h-5 mr-1'></GiPriceTag>
+                                                <p className='text-left text-base font-semibold text-black'>{product.resellPrice}$</p>
+                                            </div>
+                                            <div className='flex justify-start items-center'>
+                                                <SlLocationPin className='w-5 h-5 mr-1'></SlLocationPin>
+                                                <p className='text-left text-base'>{product.location}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className='flex justify-start items-center'>
-                                        <SlLocationPin className='w-5 h-5 mr-1'></SlLocationPin>
-                                        <p className='text-left text-base'>{product.location}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>)
-                    }
-                </div>
+                                </Link>)
+                            }
+                        </Carousel>
+                    </div>
+                }
             </div>
         </div>
     );
