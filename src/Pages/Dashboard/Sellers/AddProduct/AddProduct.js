@@ -90,6 +90,9 @@ const AddProduct = () => {
                                 <option>Point & Shoot</option>
                                 <option>DSLR</option>
                                 <option>Mirrorless</option>
+                                <option>Action</option>
+                                <option>Medium Format</option>
+                                <option>Film</option>
                             </select>
                         </div>
                         <div>

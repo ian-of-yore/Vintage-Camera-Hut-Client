@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import pointnshoot from '../../../assests/point&shoot.jpg';
 import mirrorless from '../../../assests/mirrorless.png';
 import dslr from '../../../assests/dslr.jpg';
+import action from '../../../assests/actionCamera.jfif';
+import mediumFormat from '../../../assests/mediumFormat.jpg';
+import film from '../../../assests/filmCamera.jfif';
 
 
 const Categories = () => {
@@ -11,6 +14,9 @@ const Categories = () => {
         { name: 'Point & Shoot', img: pointnshoot },
         { name: 'Mirrorless', img: mirrorless },
         { name: 'DSLR', img: dslr },
+        { name: 'Action', img: action },
+        { name: 'Medium Format', img: mediumFormat },
+        { name: 'Film', img: film },
     ]
 
     return (
