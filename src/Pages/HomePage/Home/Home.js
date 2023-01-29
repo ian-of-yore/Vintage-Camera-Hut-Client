@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <div>
             <TypeWriter></TypeWriter>
-            {/* <FerriesWheel></FerriesWheel> */}
+            <FerriesWheel></FerriesWheel>
             <Slider></Slider>
             <Categories></Categories>
             <AdvertisedProducts></AdvertisedProducts>
