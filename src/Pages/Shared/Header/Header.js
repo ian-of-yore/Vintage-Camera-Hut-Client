@@ -13,23 +13,23 @@ const Header = () => {
     }
 
     const menuItems = <>
-        <li><Link to='/products'>Products</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link></li>
+        <li className='lg:text-lg'><Link to='/products'>Products</Link></li>
+        <li className='lg:text-lg'><Link to='/blog'>Blog</Link></li>
+        <li className='lg:text-lg'><Link to='/about'>About</Link></li>
+        <li className='lg:text-lg'><Link to='/dashboard'>Dashboard</Link></li>
         {
             user?.email ?
                 <>
                     {/* <li><Link to='/dashboard'>Dashboard</Link></li> */}
-                    <li onClick={handleLogOut}><Link>Logut</Link></li>
+                    <li className='lg:text-lg' onClick={handleLogOut}><Link>Logut</Link></li>
                 </>
                 :
-                <li><Link to='/login'>Login</Link></li>
+                <li className='lg:text-lg'><Link to='/login'>Login</Link></li>
         }
     </>
 
     return (
-        <div className='bg-primary text-white'>
+        <div className='bg-stone-900 text-white lg:py-4'>
             <div className="navbar md:w-11/12 md:mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -40,7 +40,7 @@ const Header = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost normal-case text-xl">Vintage Camera Hut</Link>
+                    <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-2xl">Vintage Camera Hut</Link>
                 </div>
                 <div className='navbar-center hidden lg:flex'>
                     {

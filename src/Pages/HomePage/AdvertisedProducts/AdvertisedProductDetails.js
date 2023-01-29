@@ -101,7 +101,7 @@ const AdvertisedProductDetails = () => {
                 <div className="card-body text-black md:w-2/5">
                     <div className='flex items-center justify-between mb-2'>
                         <h2 className="card-title">{name}</h2>
-                        <div className="dropdown dropdown-right flex items-center">
+                        <div className="dropdown dropdown-end flex items-center">
                             <label tabIndex={0}><BsThreeDotsVertical className='w-4 h-4 font-bold text-black'></BsThreeDotsVertical></label>
                             <ul tabIndex={0} className="dropdown-content menu shadow w-20">
                                 <button onClick={() => handleAddToWishlist(_id)} className='btn-info btn-sm rounded-lg text-white'>Wishlist</button>
