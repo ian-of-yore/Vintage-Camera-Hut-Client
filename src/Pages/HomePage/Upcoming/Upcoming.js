@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import img from '../../../assests/film.jpg'
 import UpcomingModal from './UpcomingModal';
 
@@ -12,7 +13,13 @@ const Upcoming = () => {
     }
 
     return (
-        <div className="hero min-h-screen">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5 }}
+            className="hero min-h-screen"
+        >
             <div className="hero-content flex-col md:flex-row w-11/12 mx-auto md:w-9/12">
                 <div className='w-full sm:w-9/12 md:w-8/12 mx-auto'>
                     <img src={img} alt='' className="shadow-2xl w-full h-[400px] md:h-full" />
@@ -29,7 +36,7 @@ const Upcoming = () => {
             {
                 modalOpen && <UpcomingModal setModalOpen={setModalOpen}></UpcomingModal>
             }
-        </div>
+        </motion.div>
     );
 };
 

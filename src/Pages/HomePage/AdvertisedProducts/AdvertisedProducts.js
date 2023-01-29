@@ -9,7 +9,7 @@ const AdvertisedProducts = () => {
         queryFn: async () => {
             const res = await fetch('https://rangefinder-server.vercel.app/advertised-products');
             const data = await res.json();
-            return data.slice(0, 3);
+            return data.slice(0, 6);
         }
     })
 
@@ -18,7 +18,7 @@ const AdvertisedProducts = () => {
             {
                 advertisedProducts.length &&
                 <div className='w-11/12 mx-auto lg:w-10/12 mt-20 mb-10'>
-                    <h2 className='font-serif text-3xl text-center text-secondary mb-4'>Trending Now!</h2>
+                    <h2 className='font-serif text-3xl text-left text-secondary mb-4'>Trending Now!</h2>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                         {
                             advertisedProducts.map(product => <AdvertisedProductCard

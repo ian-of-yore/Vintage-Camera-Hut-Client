@@ -40,7 +40,7 @@ const Header = () => {
                             {menuItems}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-2xl">Vintage Camera Hut</Link>
+                    <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-4xl border-b-2 border-b-indigo-700">Vintage Camera Hut</Link>
                 </div>
                 <div className='navbar-center hidden lg:flex'>
                     {

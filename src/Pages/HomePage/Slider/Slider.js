@@ -12,10 +12,10 @@ const Slider = () => {
 
     // mt-16 w-11/12 mx-auto lg:w-10/12
     return (
-        <div className='min-h-screen mb-20'>
+        <div className='min-h-screen mb-20 w-11/12 mx-auto'>
             <div className="carousel w-full h-96 sm:h-screen">
                 <div id="slide1" className="carousel-item relative w-full">
-                    <div className="hero" style={{ backgroundImage: `url(${bg03})` }}>
+                    <div className="hero rounded-xl" style={{ backgroundImage: `url(${bg03})` }}>
                         <div className="card h-80 sm:h-[400px] md:h-[480px] lg:h-[550px] glass w-4/5 sm:w-3/5 md:w-3/5 lg:w-1/2 mx-auto">
                             <figure><img src={img02} alt="car!" className='h-72 sm:h-[350px] md:h-[380px] lg:h-[450px] w-full' /></figure>
                             <div className="card-body text-center">

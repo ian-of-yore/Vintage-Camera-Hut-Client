@@ -4,8 +4,8 @@ import FerriesWheel from '../FerriesWheel/FerriesWheel';
 
 const TypeWriter = () => {
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-5 bg-stone-900'>
-            <div className='w-full bg-stone-900 flex justify-center items-center pt-10 lg:col-span-3'>
+        <div className='grid grid-cols-1 lg:grid-cols-5 bg-stone-900 md:pb-10'>
+            <div className='w-full bg-stone-900 flex justify-center items-center py-10 lg:col-span-3'>
                 <div className='px-4 sm:px-0'>
                     <div className='text-2xl sm:text-3xl md:text-4xl font-serif sm:flex'>
                         <h1>Don't Wait Till You Can Afford a New One!</h1>
