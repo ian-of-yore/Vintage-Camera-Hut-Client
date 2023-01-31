@@ -16,11 +16,11 @@ const Home = () => {
         <div>
             <TypeWriter></TypeWriter>
             {/* <FerriesWheel></FerriesWheel> */}
-            <WhoAreWe></WhoAreWe>
+            {/* <WhoAreWe></WhoAreWe> */}
             <OverflowCarousel></OverflowCarousel>
             <TrendingProducts></TrendingProducts>
             <CategoryTabs></CategoryTabs>
-            <Slider></Slider>
+            {/* <Slider></Slider> */}
             {/* <Categories></Categories> */}
             {/* <AdvertisedProducts></AdvertisedProducts> */}
             <Upcoming></Upcoming>
