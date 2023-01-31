@@ -76,7 +76,7 @@ const CategoryTabsProducts = ({ category }) => {
                         }
                     </Carousel>
                     <div className='text-center'>
-                        <Link to={`category/${category}`} className='btn bg-stone-900 text-white mt-5 btn-wide hover:bg-gray-900'>See All</Link>
+                        <Link to={`category/${category}`} className='btn bg-gray-900 text-white mt-8 btn-wide hover:bg-stone-900'>See All</Link>
                     </div>
                 </div>
             }
