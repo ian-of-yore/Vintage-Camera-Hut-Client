@@ -1,7 +1,9 @@
 import React from 'react';
 import AdvertisedProducts from '../AdvertisedProducts/AdvertisedProducts';
 import Categories from '../Categories/Categories';
+import CategoryTabs from '../CategoryTabs/CategoryTabs';
 import FerriesWheel from '../FerriesWheel/FerriesWheel';
+import OverflowCarousel from '../OverflowCarousel/OverflowCarousel';
 import Slider from '../Slider/Slider';
 import Test from '../Test/Test';
 import TypeWriter from '../TypeWriter/TypeWriter';
@@ -14,8 +16,10 @@ const Home = () => {
             <TypeWriter></TypeWriter>
             {/* <FerriesWheel></FerriesWheel> */}
             <WhoAreWe></WhoAreWe>
+            <OverflowCarousel></OverflowCarousel>
+            <CategoryTabs></CategoryTabs>
             <Slider></Slider>
-            <Categories></Categories>
+            {/* <Categories></Categories> */}
             <AdvertisedProducts></AdvertisedProducts>
             <Upcoming></Upcoming>
         </div>
