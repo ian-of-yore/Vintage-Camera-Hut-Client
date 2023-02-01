@@ -53,7 +53,7 @@ const OverflowCarousel = () => {
                 <div className='h-40 sm:h-[300px] md:h-[380px] lg:h-[520px]'>
                     <Slider {...settings}>
                         {images.map((img, idx) => (
-                            <div className={idx === imageIndex ? "slide activeSlide" : "slide"}>
+                            <div key={idx} className={idx === imageIndex ? "slide activeSlide" : "slide"}>
                                 <img src={img} alt={img} className='h-40 sm:h-[250px] md:h-[320px] lg:h-[450px]' />
                             </div>
                         ))}

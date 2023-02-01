@@ -5,6 +5,7 @@ import CategoryTabs from '../CategoryTabs/CategoryTabs';
 import FerriesWheel from '../FerriesWheel/FerriesWheel';
 import OverflowCarousel from '../OverflowCarousel/OverflowCarousel';
 import Slider from '../Slider/Slider';
+import StaticReviews from '../StaticReviews/StaticReviews';
 import Test from '../Test/Test';
 import TrendingProducts from '../TrendingProducts/TrendingProducts';
 import TypeWriter from '../TypeWriter/TypeWriter';
@@ -23,6 +24,7 @@ const Home = () => {
             {/* <Slider></Slider> */}
             {/* <Categories></Categories> */}
             {/* <AdvertisedProducts></AdvertisedProducts> */}
+            <StaticReviews></StaticReviews>
             <Upcoming></Upcoming>
         </div>
     );
