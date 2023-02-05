@@ -6,6 +6,7 @@ import FerriesWheel from '../FerriesWheel/FerriesWheel';
 import OverflowCarousel from '../OverflowCarousel/OverflowCarousel';
 import Slider from '../Slider/Slider';
 import StaticReviews from '../StaticReviews/StaticReviews';
+import StudioRental from '../StudioRental/StudioRental';
 import Test from '../Test/Test';
 import TrendingProducts from '../TrendingProducts/TrendingProducts';
 import TypeWriter from '../TypeWriter/TypeWriter';
@@ -25,6 +26,7 @@ const Home = () => {
             {/* <Categories></Categories> */}
             {/* <AdvertisedProducts></AdvertisedProducts> */}
             <StaticReviews></StaticReviews>
+            <StudioRental></StudioRental>
             <Upcoming></Upcoming>
         </div>
     );
