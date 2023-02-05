@@ -1,5 +1,6 @@
 import React from 'react';
 import AdvertisedProducts from '../AdvertisedProducts/AdvertisedProducts';
+import Blogs from '../Blogs/Blogs';
 import Categories from '../Categories/Categories';
 import CategoryTabs from '../CategoryTabs/CategoryTabs';
 import FerriesWheel from '../FerriesWheel/FerriesWheel';
@@ -28,6 +29,7 @@ const Home = () => {
             <StaticReviews></StaticReviews>
             <StudioRental></StudioRental>
             <Upcoming></Upcoming>
+            <Blogs></Blogs>
         </div>
     );
 };

@@ -25,9 +25,9 @@ const StaticReviews = () => {
                     <div className='w-full flex justify-center'>
                         <div className="carousel carousel-vertical rounded-lg h-80 sm:h-[400px] md:h-[480px] lg:h-[650px] w-full">
                             <div id="slide1" className="carousel-item relative w-full h-full">
-                                <div class="relative w-full">
+                                <div className="relative w-full">
                                     <img src={bg} alt='' style={{ opacity: .9 }} className='h-96 sm:h-[400px] md:h-[480px] lg:h-[650px] w-full' />
-                                    <div class="absolute top-2 sm:top-5 md:top-10 left-5">
+                                    <div className="absolute top-2 sm:top-5 md:top-10 left-5">
                                         <p className='text-sm sm:text-base md:text-lg font-semibold text-gray-900 px-2 md:px-8 text-justify'>
                                             "Received first class service from the Vintage Camera Hut when buying a point and shoot camera for
                                             my daughter's Christmas. Their expert advice was most welcome and their customer service of the
@@ -52,9 +52,9 @@ const StaticReviews = () => {
                                 </div>
                             </div>
                             <div id="slide2" className="carousel-item relative w-full">
-                                <div class="relative w-full">
+                                <div className="relative w-full">
                                     <img src={bg3} alt='' style={{ opacity: 1 }} className='h-96 sm:h-[400px] md:h-[480px] lg:h-[650px] w-full' />
-                                    <div class="absolute top-2 sm:top-5 md:top-10 left-5">
+                                    <div className="absolute top-2 sm:top-5 md:top-10 left-5">
                                         <p className='text-sm sm:text-base md:text-lg font-semibold text-stone-900 px-2 md:px-8 text-justify'>
                                             "I have never been in the store but their customer service is WONDERFUL!!! I gave my niece a gift card
                                             for her birthday in March. Last weekend her purse was stolen with the gift card in it.  I contacted them
@@ -79,9 +79,9 @@ const StaticReviews = () => {
                                 </div>
                             </div>
                             <div id="slide3" className="carousel-item relative w-full">
-                                <div class="relative w-full">
+                                <div className="relative w-full">
                                     <img src={bg4} alt='' style={{ opacity: 1 }} className='h-96 sm:h-[400px] md:h-[480px] lg:h-[650px] w-full' />
-                                    <div class="absolute top-2 sm:top-5 md:top-10 left-5">
+                                    <div className="absolute top-2 sm:top-5 md:top-10 left-5">
                                         <p className='text-sm sm:text-base md:text-lg font-semibold text-gray-900 px-2 md:px-8 text-justify'>
                                             "Excellent art supply store with great selection and prices. Very knowledgeable and helpful stuff will
                                             advise customers to find what they need. Nice big space and very pleasant environment. It's one of the
@@ -105,9 +105,9 @@ const StaticReviews = () => {
                                 </div>
                             </div>
                             <div id="slide4" className="carousel-item relative w-full">
-                                <div class="relative w-full">
+                                <div className="relative w-full">
                                     <img src={bg2} alt='' style={{ opacity: .9 }} className='h-96 sm:h-[400px] md:h-[480px] lg:h-[650px] w-full' />
-                                    <div class="absolute top-2 sm:top-5 md:top-10 left-5">
+                                    <div className="absolute top-2 sm:top-5 md:top-10 left-5">
                                         <p className='text-sm sm:text-base md:text-lg font-semibold text-stone-900 px-2 md:px-8 text-justify'>
                                             "If you, like me, know nothing about custom framing, a word of caution- Blick does not give quotes without
                                             an in person appointment, and had it not been a 50% off sale this week, our original plan for two diplomas

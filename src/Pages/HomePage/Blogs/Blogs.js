@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { FaGreaterThan } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-const Blog = () => {
-
+const Blogs = () => {
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
         fetch('BlogData.json')
             .then(res => res.json())
-            .then(data => setArticles(data))
+            .then(data => setArticles(data.slice(0, 3)))
     }, []);
 
+    // console.log(articles)
+
+
     return (
-        <div className='flex justify-center min-h-screen my-20 w-11/12 mx-auto lg:w-10/12'>
+        <div className='flex min-h-screen justify-center items-center mb-16 mt-20 lg:mb-20 w-11/12 mx-auto lg:w-10/12'>
             <div>
                 <div>
                     <h1 className='text-xl sm:text-4xl font-semibold text-gray-900'>Vintage Camera Hut Original Content</h1>
@@ -37,9 +40,12 @@ const Blog = () => {
                         </div>)
                     }
                 </div>
+                <div>
+                    <Link to='/blog'><button className='btn btn-ghost text-xl normal-case hover:text-gray-900 text-gray-900 mt-5 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-800'>See all original contents <FaGreaterThan className='text-gray-900 pt-1 pl-1'></FaGreaterThan></button></Link>
+                </div>
             </div>
         </div>
     );
 };
 
-export default Blog;
+export default Blogs;
