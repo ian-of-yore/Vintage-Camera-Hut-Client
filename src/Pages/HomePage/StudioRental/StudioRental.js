@@ -1,7 +1,35 @@
 import React from 'react';
-import img from '../../../assests/studioSpace.jfif';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import img01 from '../../../assests/studioSpace.jfif';
+import img02 from '../../../assests/studioSpace02.jfif';
+import img03 from '../../../assests/studioSpace03.jfif';
+import img04 from '../../../assests/studioSpace04.jfif';
+
 
 const StudioRental = () => {
+
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 1
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 1
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 1
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
+
+
     return (
         <div className='flex h-[700px] sm:h-[700px] md:h-[800px] lg:h-[650px] justify-center items-center w-11/12 mx-auto mt-20 mb-10 md:mt-48 lg:mt-20'
         >
@@ -19,7 +47,19 @@ const StudioRental = () => {
                         </div>
                     </div>
                     <div className='lg:w-1/2'>
-                        <figure className='bg-yellow-700 w-full h-full'><img src={img} alt="Album" className='w-full h-[450px] sm:h-[500px] md:h-[500px] lg:h-[650px]' /></figure>
+                        <Carousel
+                            responsive={responsive}
+                            swipeable={true}
+                            infinite={true}
+                            autoPlay={true}
+                            autoPlaySpeed={2000}
+                            arrows={false}
+                        >
+                            <figure className='bg-yellow-700 w-full h-full'><img src={img01} alt="Album" className='w-full h-[450px] sm:h-[500px] md:h-[500px] lg:h-[650px]' /></figure>
+                            <figure className='bg-yellow-700 w-full h-full'><img src={img02} alt="Album" className='w-full h-[450px] sm:h-[500px] md:h-[500px] lg:h-[650px]' /></figure>
+                            <figure className='bg-yellow-700 w-full h-full'><img src={img03} alt="Album" className='w-full h-[450px] sm:h-[500px] md:h-[500px] lg:h-[650px]' /></figure>
+                            <figure className='bg-yellow-700 w-full h-full'><img src={img04} alt="Album" className='w-full h-[450px] sm:h-[500px] md:h-[500px] lg:h-[650px]' /></figure>
+                        </Carousel>
                     </div>
                 </div>
             </div>

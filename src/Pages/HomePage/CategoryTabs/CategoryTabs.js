@@ -20,13 +20,13 @@ const CategoryTabs = () => {
                     format cameras.</p>
                 <div className='text-black text-left'>
                     <Tabs>
-                        <TabList className='sm:text-lg md:text-xl lg:text-2xl font-serif mb-2 pl-2'>
-                            <Tab>Film</Tab>
-                            <Tab>Point & Shoot</Tab>
-                            <Tab>Mirrorless</Tab>
-                            <Tab>DSLR</Tab>
-                            <Tab>Action</Tab>
-                            <Tab>Medium-Format</Tab>
+                        <TabList className='sm:text-lg md:text-xl lg:text-xl font-serif mb-2 pl-2 flex border-l-4 border-indigo-900'>
+                            <Tab className='bg-gray-900 cursor-pointer text-white p-2 rounded-lg mr-2'>Film</Tab>
+                            <Tab className='bg-gray-900 cursor-pointer text-white p-2 rounded-lg mr-2'>Point & Shoot</Tab>
+                            <Tab className='bg-gray-900 cursor-pointer text-white p-2 rounded-lg mr-2'>Mirrorless</Tab>
+                            <Tab className='bg-gray-900 cursor-pointer text-white p-2 rounded-lg mr-2'>DSLR</Tab>
+                            <Tab className='bg-gray-900 cursor-pointer text-white p-2 rounded-lg mr-2'>Action</Tab>
+                            <Tab className='bg-gray-900 cursor-pointer text-white p-2 rounded-lg mr-2'>Medium-Format</Tab>
                         </TabList>
                         <TabPanel>
                             <CategoryTabsProducts category={'Film'}></CategoryTabsProducts>

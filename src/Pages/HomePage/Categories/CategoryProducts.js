@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiPriceTag } from 'react-icons/gi';
 import { SlLocationPin } from 'react-icons/sl';
 import { Link, useLoaderData } from 'react-router-dom';
 // import CategoryProductsCard from './CategoryProductsCard';
 
-const CategoryProducts = () => {
-    const products = useLoaderData();
-    const { category } = products[0];
+const CategoryProducts = ({ category }) => {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch(`https://rangefinder-server.vercel.app/category/${category}`)
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [category])
 
     return (
-        <div className='w-11/12 mx-auto my-10 min-h-screen'>
-            <h3 className='mb-5 font-serif text-3xl text-black'>Explore the products in our <span className='font-sans font-semibold'>{category}</span> category</h3>
+        <div className='w-full my-10 min-h-screen'>
+            <h3 className='mb-5 font-serif text-3xl text-black text-left underline'>Available products in the <span className='font-sans font-semibold'>{category}</span> category</h3>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6'>
                 {
                     products.map(product => <Link to={`/product/${product._id}`} key={product._id}>
