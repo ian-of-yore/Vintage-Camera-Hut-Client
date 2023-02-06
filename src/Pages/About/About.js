@@ -3,7 +3,7 @@ import img from '../../assests/AboutUs.jfif';
 
 const About = () => {
     return (
-        <div className='my-20 min-h-screen w-11/12 mx-auto md:w-9/12'>
+        <div className='my-20 min-h-screen w-11/12 mx-auto md:w-10/12'>
             <h1 className='text-2xl sm:text-5xl font-serif mt-14 mb-10 text-gray-900'>We are Vintage Camera Hut</h1>
             <div className="hero mt-4">
                 <div className="hero-content flex-col lg:flex-row-reverse shadow-2xl lg:h-[450px] p-0">
